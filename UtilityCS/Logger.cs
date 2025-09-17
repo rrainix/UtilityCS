@@ -1,0 +1,47 @@
+﻿
+namespace UtilityCS
+{
+    // Logger is a highlevel console logging class, used for efficient debugging
+    // Usage example:
+    // if (Item == null) Logger.Warning("Item", "Shouldn't be null.");
+    // Output: [20:00:00][Warning][Item] Shouldn't be null.
+
+    public static class Logger
+    {
+        private enum LogType { Info, Warning, Error }
+        public static bool Tracing { get; set; }
+
+        public static void WriteColored(string text, ConsoleColor color)
+        {
+            var oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ForegroundColor = oldColor;
+        }
+
+        public static void Message(string topic, string message)  => LogInternal(LogType.Info, topic, message);
+
+        public static void Warning(string topic, string message) => LogInternal(LogType.Warning, topic, message);
+
+        public static void Error(string topic, string message) => LogInternal(LogType.Error, topic, message);
+
+        private static void LogInternal(LogType type, string topic, string message)
+        {
+            string timestamp = DateTime.Now.ToString("HH:mm:ss");
+            string formatted = $"[{timestamp}][{type}][{topic}] {message}";
+
+            switch (type)
+            {
+                case LogType.Info:
+                    WriteColored(formatted, ConsoleColor.Green);
+                    break;
+                case LogType.Warning:
+                    WriteColored(formatted, ConsoleColor.Yellow);
+                    break;
+                case LogType.Error:
+                    WriteColored(formatted, ConsoleColor.Red);
+                    break;
+            }
+        }
+    }
+}
