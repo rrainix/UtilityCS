@@ -5,6 +5,7 @@ public class Program
     {
         UtilityCS.Random random = new UtilityCS.Random();
         for(int i = 0; i < 10; i++)
-        Console.WriteLine(random.Next(0, 10));
+        Console.WriteLine(random.Next(11, 10));
+      
     }
 }

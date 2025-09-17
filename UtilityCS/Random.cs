@@ -41,11 +41,11 @@ namespace UtilityCS
 
         public int Next(int min, int max)
         {
-            if (min >= max) throw new ArgumentOutOfRangeException();
+            if (min >= max) throw new ArgumentOutOfRangeException($"Next({min},{max}) is wrong, min can't be more or equal to max.");
             return min + (Next() % (max - min));
         }
 
-        public double NextDouble() // Returns a double between 0.0 - 1.0
+        public double NextDouble() // Returns a double between 0.0 and 1.0
         {
             return (double)NextState() / ulong.MaxValue;
         }

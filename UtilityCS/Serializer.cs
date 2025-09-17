@@ -22,7 +22,6 @@ namespace UtilityCS
 
         public static class Binary
         {
-            // Only used for Saving unmanged types such as structs
             public static void SaveUnmanagedBlock<T>(string path, ReadOnlySpan<T> span, CompressionLevel level = CompressionLevel.Fastest) where T : unmanaged
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
@@ -39,12 +38,10 @@ namespace UtilityCS
                 ReadOnlySpan<byte> raw = MemoryMarshal.AsBytes(span);
                 gzip.Write(raw);
             }
-
-            // Only used for Loading unmanged types such as structs
             public static ReadOnlySpan<T> LoadUnmanagedBlock<T>(string path) where T : unmanaged
             {
                 if (!File.Exists(path))
-                    throw new FileNotFoundException($"Datei nicht gefunden: {path}");
+                    throw new FileNotFoundException($"File not found at path ({path})");
 
                 using var fs = new FileStream(
                     path,
@@ -60,7 +57,7 @@ namespace UtilityCS
                 Span<byte> lenSpan = stackalloc byte[4];
                 int read = gzip.Read(lenSpan);
                 if (read != lenSpan.Length)
-                    throw new EndOfStreamException("Konnte Länge nicht vollständig lesen.");
+                    throw new EndOfStreamException($"Expected {lenSpan.Length} bytes but only read {read}.");
 
                 int count = BinaryPrimitives.ReadInt32LittleEndian(lenSpan);
 
@@ -72,7 +69,7 @@ namespace UtilityCS
                 {
                     int n = gzip.Read(buffer, offset, byteCount - offset);
                     if (n == 0)
-                        throw new EndOfStreamException("Unerwartetes Dateiende beim Lesen der Daten.");
+                        throw new EndOfStreamException();
                     offset += n;
                 }
 
@@ -99,7 +96,7 @@ namespace UtilityCS
             public static T LoadObject<T>(string path, JsonSerializerOptions? options = null)
             {
                 if (!File.Exists(path))
-                    throw new FileNotFoundException($"File nicht gefunden: {path}");
+                    throw new FileNotFoundException($"File not found at path ({path})");
 
                 using var fs = new FileStream(
                     path,
@@ -114,7 +111,7 @@ namespace UtilityCS
                 using var gzip = new GZipStream(fs, CompressionMode.Decompress, leaveOpen: false);
 
                 return System.Text.Json.JsonSerializer.Deserialize<T>(gzip, defaultJsonOptions)
-                       ?? throw new InvalidDataException("Deserialisierung ergab null");
+                       ?? throw new InvalidDataException("Deserialization resulted in null");
             }
         }
         public static class Json
@@ -149,7 +146,7 @@ namespace UtilityCS
                     try
                     {
                         return System.Text.Json.JsonSerializer.Deserialize<T>(fs, options)!
-                               ?? throw new InvalidDataException("Deserialisierung ergab null");
+                               ?? throw new InvalidDataException("Deserialization resulted in null");
                     }
                     catch
                     {
@@ -160,9 +157,9 @@ namespace UtilityCS
         }
         public static class JsonSecure
         {
-            private const int SaltSize = 16; // 128 Bit
-            private const int IvSize = 16;   // 128 Bit
-            private const int KeySize = 32;  // 256 Bit
+            private const int SaltSize = 16;
+            private const int IvSize = 16;
+            private const int KeySize = 32;
             private const int Iterations = 100_000;
 
             public static void SaveObject<T>(string path, string password, T obj, JsonSerializerOptions? options = null)
@@ -216,7 +213,7 @@ namespace UtilityCS
                     byte[] salt = new byte[SaltSize];
                     byte[] iv = new byte[IvSize];
                     if (fs.Read(salt) != SaltSize || fs.Read(iv) != IvSize)
-                        throw new InvalidDataException("Ungültiges Dateiformat.");
+                        throw new InvalidDataException("Invalid fileformat");
 
                     options ??= defaultJsonOptions;
 
@@ -234,11 +231,11 @@ namespace UtilityCS
                     using var crypto = new CryptoStream(fs, aes.CreateDecryptor(), CryptoStreamMode.Read);
 
                     return JsonSerializer.Deserialize<T>(crypto, options)!
-                           ?? throw new InvalidDataException("Deserialisierung ergab null");
+                           ?? throw new InvalidDataException("Deserialization resulted in null");
                 }
                 catch
                 {
-                    throw new InvalidDataException("Falsches Passwort oder beschädigte Datei");
+                    throw new InvalidDataException("Wrong password or damaged file");
                 }
             }
         }
