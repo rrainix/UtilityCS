@@ -1,48 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace UtilityCS
 {
     public class Random
     {
-        private long _seed;
+        private ulong state;
 
-        // Konstanten für LCG (Beispielwerte)
-        private const long a = 1664525;
-        private const long c = 1013904223;
-        private const long m = 1L << 32; // 2^32
-
-        public Random(long seed)
+        public Random(ulong seed)
         {
-            _seed = seed;
+            state = seed;
         }
 
-        // Gibt eine Zahl zwischen 0 und int.MaxValue zurück
+        public Random()
+        {
+            ulong t = (ulong)DateTime.Now.Ticks;
+            ulong g = (ulong)Guid.NewGuid().GetHashCode();
+            ulong s = (ulong)Stopwatch.GetTimestamp();
+            state = t ^ g ^ s;
+        }
+
+        private ulong NextState()
+        {
+            state ^= state >> 12;
+            state ^= state << 25;
+            state ^= state >> 27;
+            return state * 2685821657736338717UL;
+        }
+
         public int Next()
         {
-            _seed = (a * _seed + c) % m;
-            return (int)(_seed & 0x7FFFFFFF);
+            return (int)(NextState() & 0x7FFFFFFF);
         }
 
-        // Gibt eine Zahl zwischen 0 und max zurück
         public int Next(int max)
         {
+            if (max <= 0) throw new ArgumentOutOfRangeException(nameof(max));
             return Next() % max;
         }
 
-        // Gibt eine Zahl zwischen min und max zurück
         public int Next(int min, int max)
         {
+            if (min >= max) throw new ArgumentOutOfRangeException();
             return min + (Next() % (max - min));
         }
 
-        // Gibt einen Double-Wert zwischen 0.0 und 1.0 zurück
-        public double NextDouble()
+        public double NextDouble() // Returns a double between 0.0 - 1.0
         {
-            return (double)Next() / int.MaxValue;
+            return (double)NextState() / ulong.MaxValue;
         }
     }
 }

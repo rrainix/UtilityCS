@@ -13,7 +13,7 @@ namespace UtilityCS
 {
     public static class Serializer
     {
-        private static readonly JsonSerializerOptions DefaultJsonOptions = new JsonSerializerOptions
+        private static readonly JsonSerializerOptions defaultJsonOptions = new JsonSerializerOptions
         {
             IncludeFields = true,
             PropertyNameCaseInsensitive = true,
@@ -91,10 +91,10 @@ namespace UtilityCS
                     bufferSize: 1 << 20,
                     options: FileOptions.SequentialScan);
 
-                options ??= DefaultJsonOptions;
+                options ??= defaultJsonOptions;
 
                 using var gzip = new GZipStream(fs, compressionLevel, leaveOpen: false);
-                System.Text.Json.JsonSerializer.Serialize(gzip, item, DefaultJsonOptions);
+                System.Text.Json.JsonSerializer.Serialize(gzip, item, defaultJsonOptions);
             }
             public static T LoadObject<T>(string path, JsonSerializerOptions? options = null)
             {
@@ -109,11 +109,11 @@ namespace UtilityCS
                     bufferSize: 1 << 20,
                     options: FileOptions.SequentialScan);
 
-                options ??= DefaultJsonOptions;
+                options ??= defaultJsonOptions;
 
                 using var gzip = new GZipStream(fs, CompressionMode.Decompress, leaveOpen: false);
 
-                return System.Text.Json.JsonSerializer.Deserialize<T>(gzip, DefaultJsonOptions)
+                return System.Text.Json.JsonSerializer.Deserialize<T>(gzip, defaultJsonOptions)
                        ?? throw new InvalidDataException("Deserialisierung ergab null");
             }
         }
@@ -127,7 +127,7 @@ namespace UtilityCS
                     path, FileMode.Create, FileAccess.Write, FileShare.None,
                     bufferSize: 1 << 20, FileOptions.SequentialScan);
 
-                options ??= DefaultJsonOptions;
+                options ??= defaultJsonOptions;
 
                 using (fs)
                 {
@@ -142,7 +142,7 @@ namespace UtilityCS
                     path, FileMode.Open, FileAccess.Read, FileShare.Read,
                     bufferSize: 1 << 20, FileOptions.SequentialScan);
 
-                options ??= DefaultJsonOptions;
+                options ??= defaultJsonOptions;
 
                 using (fs)
                 {
@@ -175,7 +175,7 @@ namespace UtilityCS
                     bufferSize: 1 << 20,
                     options: FileOptions.SequentialScan);
 
-                options ??= DefaultJsonOptions;
+                options ??= defaultJsonOptions;
 
                 byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
                 byte[] iv = RandomNumberGenerator.GetBytes(IvSize);
@@ -218,7 +218,7 @@ namespace UtilityCS
                     if (fs.Read(salt) != SaltSize || fs.Read(iv) != IvSize)
                         throw new InvalidDataException("Ungültiges Dateiformat.");
 
-                    options ??= DefaultJsonOptions;
+                    options ??= defaultJsonOptions;
 
                     using var kdf = new Rfc2898DeriveBytes(password, salt, Iterations, HashAlgorithmName.SHA256);
                     byte[] key = kdf.GetBytes(KeySize);
