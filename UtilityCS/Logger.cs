@@ -4,7 +4,7 @@ namespace UtilityCS
     // Logger is a highlevel console logging class, used for efficient debugging
     // Usage example:
     // if (Item == null) Logger.Warning("Item", "Shouldn't be null.");
-    // Output: [20:00:00][Warning][Item] Shouldn't be null.
+    // Output: [HH:mm:ss][Warning][Item] Shouldn't be null.
 
     public static class Logger
     {
