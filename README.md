@@ -1,4 +1,4 @@
-# UtilityCsharp Library 
+# C# Utility Library 
 UtilityCS is a wide-range C# library
 
 ## Usage
