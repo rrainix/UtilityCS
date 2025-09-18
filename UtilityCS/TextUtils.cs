@@ -18,16 +18,6 @@ namespace UtilityCS
         {
             return new string(input.Where(c => allowedChars.Contains(c)).ToArray());
         }
-        public static string RemoveChars(string input, FilterOption filterOption)
-        {
-            string nonAllowed = filterOption == FilterOption.Digits ? DIGITS : (filterOption == FilterOption.Letters ? LETTERS : (DIGITS + LETTERS));
-            return new string(input.Where(c => !nonAllowed.Contains(c)).ToArray());
-        }
-        public static string KeepOnly(string input, FilterOption filterOption)
-        {
-            string allowedChars = filterOption == FilterOption.Digits ? DIGITS : (filterOption == FilterOption.Letters ? LETTERS : (DIGITS + LETTERS));
-            return new string(input.Where(c => allowedChars.Contains(c)).ToArray());
-        }
         public static char[] GetFilter(FilterOption filterOption, bool useSpace = true)
         {
             string allowedChars = filterOption == FilterOption.Digits ? DIGITS : (filterOption == FilterOption.Letters ? LETTERS : (DIGITS + LETTERS));
