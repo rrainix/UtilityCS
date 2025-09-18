@@ -1,5 +1,7 @@
 ﻿
 
+using System.Drawing;
+
 namespace UtilityCS
 {
     public enum FilterOption { Digits, Letters, Alphanumeric };
@@ -23,6 +25,16 @@ namespace UtilityCS
             string allowedChars = filterOption == FilterOption.Digits ? DIGITS : (filterOption == FilterOption.Letters ? LETTERS : (DIGITS + LETTERS));
             allowedChars += useSpace ? SPACE : "";
             return allowedChars.ToArray();
+        }
+
+        public static string ToHex(int s) => $"#{s:X2}";
+        public static string ToHex(long s) => $"#{s:X2}";
+
+        public static int WordsCount(string s) => s.Split(' ').Length;
+
+        public static string ColoredString(string text, string hexColor) // Note: Only useable when rich text editing is beeing supported
+        {
+            return $"<color=#{hexColor}>{text}</color>";
         }
     }
 }
