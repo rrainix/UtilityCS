@@ -17,5 +17,6 @@ namespace UtilityCS
         public static double Range(double min, double max) => random.Next(min, max);
         public static bool FlipCoin() => random.FlipCoin();
         public static bool Chance(float threshold, float max = 1.0f) => random.Chance(threshold, max);
+        public static double NextDouble() => random.Next(0.0, 1.0);
     }
 }
