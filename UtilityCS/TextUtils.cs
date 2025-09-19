@@ -29,6 +29,25 @@ namespace UtilityCS
 
         public static string ToHex(int s) => $"#{s:X2}";
         public static string ToHex(long s) => $"#{s:X2}";
+        public static string ToHex(params int[] values)
+        {
+            string result = string.Empty;
+            foreach (var i in values)
+            {
+                result += ToHex(i);
+            }
+            return result;
+        }
+        public static string ToHex(params long[] values)
+        {
+            string result = string.Empty;
+            foreach (var l in values)
+            {
+                result += ToHex(l);
+            }
+            return result;
+        }
+
 
         public static int WordsCount(string s) => s.Split(' ').Length;
 
