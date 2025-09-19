@@ -2,16 +2,16 @@
 
 namespace UtilityCS
 {
-    public class Random
+    public class RandomCS
     {
         private ulong state;
 
-        public Random(ulong seed)
+        public RandomCS(ulong seed)
         {
             SetSeed(seed);
         }
 
-        public Random()
+        public RandomCS()
         {
             RemoveSeed();
         }

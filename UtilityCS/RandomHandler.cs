@@ -8,7 +8,7 @@ namespace UtilityCS
 {
     public static class RandomHandler
     {
-        private static Random random = new Random();
+        private static RandomCS random = new RandomCS();
 
         public static int Range(int min, int max) => random.Next(min, max);
         public static double Range(double min, double max) => random.Next(min, max);

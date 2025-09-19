@@ -2,7 +2,7 @@
 
 namespace UtilityCS
 {
-    public static class Math
+    public static class MathCS
     {
         private static readonly DataTable dataTable = new DataTable();
 
