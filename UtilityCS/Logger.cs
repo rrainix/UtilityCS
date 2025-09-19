@@ -8,7 +8,7 @@ namespace UtilityCS
 
     public static class Logger
     {
-        private enum LogType { Info, Warning, Error }
+        private enum LogType { Info, Message, Warning, Error }
         public static bool Tracing { get; set; }
 
         public static void WriteColored(string text, ConsoleColor color)
@@ -18,11 +18,9 @@ namespace UtilityCS
             Console.WriteLine(text);
             Console.ForegroundColor = oldColor;
         }
-
-        public static void Message(string topic, string message)  => LogInternal(LogType.Info, topic, message);
-
+        public static void Message(string topic, string message) => LogInternal(LogType.Message, topic, message);
+        public static void Info(string topic, string message)  => LogInternal(LogType.Info, topic, message);
         public static void Warning(string topic, string message) => LogInternal(LogType.Warning, topic, message);
-
         public static void Error(string topic, string message) => LogInternal(LogType.Error, topic, message);
 
         private static void LogInternal(LogType type, string topic, string message)
@@ -35,6 +33,8 @@ namespace UtilityCS
                 case LogType.Info:
                     WriteColored(formatted, ConsoleColor.Green);
                     break;
+                case LogType.Message:
+                    WriteColored(formatted, ConsoleColor.White); break;
                 case LogType.Warning:
                     WriteColored(formatted, ConsoleColor.Yellow);
                     break;
