@@ -3,6 +3,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Logger.Message("Test", "Hallo");
+        Logger.Message("Test", "Hello World!");
     }
 }
