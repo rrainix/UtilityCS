@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Company>Ben Schneider</Company>
-		<Product>Advanced Calculator</Product>
+		<Product>Utility Library</Product>
 	</PropertyGroup>
 
 	<ItemGroup>
