@@ -8,3 +8,4 @@ UtilityCS is a wide-range C# library
 - Mathematics
 - Logging
 - Mini LINQ
+- CMD Helper
