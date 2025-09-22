@@ -14,6 +14,31 @@ namespace UtilityCS
             return default;
         }
 
+        public static int IndexOf<T>(T[] array, T obj)
+        {
+            int i = 0;
+
+            foreach (var item in array)
+            {
+                if (item.Equals(obj)) return i;
+                i++;
+            }
+
+            return -1;
+        }
+        public static int IndexOf<T>(T[] array, Func<T, bool> predicate)
+        {
+            int i = 0;
+
+            foreach (var item in array)
+            {
+                if (predicate(item)) return i;
+                i++;
+            }
+
+            return -1;
+        }
+
         public static TResult[] Select<T, TResult>(this T[] array, Func<T, TResult> selector)
         {
             var result = new TResult[array.Length];
@@ -73,6 +98,31 @@ namespace UtilityCS
             }
 
             return default;
+        }
+
+        public static int IndexOf<T>(List<T> list, T obj)
+        {
+            int i = 0;
+
+            foreach (var item in list)
+            {
+                if (item.Equals(obj)) return i;
+                i++;
+            }
+
+            return -1;
+        }
+        public static int IndexOf<T>(List<T> list, Func<T, bool> predicate)
+        {
+            int i = 0;
+
+            foreach (var item in list)
+            {
+                if (predicate(item)) return i;
+                i++;
+            }
+
+            return -1;
         }
 
         public static TResult[] Select<T, TResult>(this List<T> list, Func<T, TResult> selector)

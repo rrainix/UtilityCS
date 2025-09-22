@@ -6,7 +6,7 @@ namespace UtilityCS
 {
     public enum FilterOption { Digits, Letters, Alphanumeric };
 
-    public class TextUtils
+    public static class TextUtils
     {
         public const string DIGITS = "0123456789";
         public const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

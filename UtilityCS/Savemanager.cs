@@ -15,6 +15,7 @@ namespace UtilityCS
             PropertyNameCaseInsensitive = true,
             WriteIndented = false
         };
+
         public static readonly string MainPath = Filemanager.FromGameFolder("SaveManager Storage");
 
         public static string GetType<T>()
@@ -59,7 +60,7 @@ namespace UtilityCS
 
             using (fs)
             {
-                System.Text.Json.JsonSerializer.Serialize(fs, obj, options);
+                JsonSerializer.Serialize(fs, obj, options);
             }
         }
         public static T Load<T>(string key, T defaultValue = default!, JsonSerializerOptions? options = null)
@@ -78,7 +79,7 @@ namespace UtilityCS
             {
                 try
                 {
-                    return System.Text.Json.JsonSerializer.Deserialize<T>(fs, options)!
+                    return JsonSerializer.Deserialize<T>(fs, options)!
                                ?? throw new InvalidDataException("Deserialization resulted in null");
                 }
                 catch
