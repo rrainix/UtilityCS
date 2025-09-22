@@ -18,15 +18,15 @@ namespace UtilityCS
             Console.WriteLine(text);
             Console.ForegroundColor = oldColor;
         }
-        public static void Message(string topic, string message) => LogInternal(LogType.Message, topic, message);
-        public static void Info(string topic, string message)  => LogInternal(LogType.Info, topic, message);
-        public static void Warning(string topic, string message) => LogInternal(LogType.Warning, topic, message);
-        public static void Error(string topic, string message) => LogInternal(LogType.Error, topic, message);
+        public static void Message(string message, string topic = "") => LogInternal(LogType.Message, "", message);
+        public static void Info(string message, string topic = "") => LogInternal(LogType.Info, topic, message);
+        public static void Warning(string message, string topic = "") => LogInternal(LogType.Warning, topic, message);
+        public static void Error(string message, string topic = "") => LogInternal(LogType.Error, topic, message);
 
-        private static void LogInternal(LogType type, string topic, string message)
+        private static void LogInternal(LogType type, string message, string topic = "")
         {
             string timestamp = DateTime.Now.ToString("HH:mm:ss");
-            string formatted = $"[{timestamp}][{type}][{topic}] {message}";
+            string formatted = $"[{timestamp}][{type}]{(topic == "" ? "" : $"[{topic}]")} {message}";
 
             switch (type)
             {

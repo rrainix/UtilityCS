@@ -13,7 +13,7 @@ namespace UtilityCS
         public static readonly string MainPath = Filemanager.FromLocalAppFolder("SaveManager Storage");
 
         private static string CreatePathFromType<T>(string key) 
-            => Filemanager.CombineExtension(Extension.json, MainPath, MainPath, typeof(T).Name, key);
+            => Filemanager.CombinePathWithExtension(Extension.json, MainPath, MainPath, typeof(T).Name, key);
 
         public static int GetFilesCount() => Filemanager.GetDirectoryFiles(MainPath, true).Length;
 
