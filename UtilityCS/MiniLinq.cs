@@ -78,15 +78,6 @@ namespace UtilityCS
 
             return false;
         }
-        public static T2[] As<T, T2>(T[] array, Func<T, T2> selector)
-        {
-            var result = new T2[array.Length];
-            for (int i = 0; i < array.Length; i++)
-            {
-                result[i] = selector(array[i]);
-            }
-            return result;
-        }
         #endregion
 
         #region List
@@ -162,15 +153,6 @@ namespace UtilityCS
             }
 
             return false;
-        }
-        public static List<T2> As<T, T2>(List<T> list, Func<T, T2> selector)
-        {
-            var result = new List<T2>(list.Count);
-            for (int i = 0; i < list.Count; i++)
-            {
-                result[i] = selector(list[i]);
-            }
-            return result;
         }
         #endregion
     }
