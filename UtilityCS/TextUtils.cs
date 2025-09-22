@@ -51,7 +51,7 @@ namespace UtilityCS
 
         public static int WordsCount(string s) => s.Split(' ').Length;
 
-        public static string ColoredString(string text, string hexColor) // Note: Only useable when rich text editing is beeing supported
+        public static string ToColoredString(string text, string hexColor) // Note: Only useable when rich text editing is beeing supported
         {
             return $"<color=#{hexColor}>{text}</color>";
         }

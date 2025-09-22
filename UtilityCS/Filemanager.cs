@@ -19,9 +19,8 @@ namespace UtilityCS
         public static string DesktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         public static string LocalAppFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        public static string FromGameFolder(params string[] strings) => Path.Combine(LocalAppFolder, Path.Combine(strings));
-        public static string FromGameFolder(Extension extension, params string[] strings) => SetExtensionPath(Path.Combine(LocalAppFolder, Path.Combine(strings)), extension);
-        public static string SetExtensionPath(string path, Extension dataType) => Path.ChangeExtension(path, dataType.ToString());
+        public static string FromLocalAppFolder(params string[] paths) => Path.Combine(LocalAppFolder, Path.Combine(paths));
+        public static string CombineExtension(Extension extension, params string[] paths) => Path.ChangeExtension(Path.Combine(paths), extension.ToString());
         public static float GetFileSize(string path, MemoryUnit memoryUnit)
         {
             if (File.Exists(path))
@@ -32,6 +31,7 @@ namespace UtilityCS
 
             return -1;
         }
+
         public static void DeleteAllFromDirectory(string directoryPath, bool onlyFiles)
         {
             if (Directory.GetDirectories(directoryPath).Length > 0)
@@ -64,13 +64,13 @@ namespace UtilityCS
             }
         }
 
-        public static string[] GetDirectoryFiles(string directoryPath) => Directory.GetFiles(directoryPath);
-        public static string[] GetDirectories(string path) => Directory.GetDirectories(path);
-        public static string[] GetDirectoryFilesRecursive(string path)
+        public static string[] GetDirectoryFiles(string dirPath, bool recursive = false) => recursive ? GetDirectoryFilesRecursive(dirPath) : Directory.GetFiles(dirPath);
+        public static string[] GetDirectories(string dirPath) => Directory.GetDirectories(dirPath);
+        private static string[] GetDirectoryFilesRecursive(string dirPath)
         {
             List<string> files = new List<string>();
 
-            foreach (var dir in GetDirectories(path))
+            foreach (var dir in GetDirectories(dirPath))
             {
                 files.AddRange(GetDirectoryFiles(dir));
             }
