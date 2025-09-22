@@ -27,14 +27,14 @@ namespace UtilityCS
             return allowedChars.ToArray();
         }
 
-        public static string ToHex(int s) => $"#{s:X2}";
-        public static string ToHex(long s) => $"#{s:X2}";
+        public static string ToHex(int value) => $"#{value:X2}";
+        public static string ToHex(long value) => $"#{value:X2}";
         public static string ToHex(params int[] values)
         {
-            string result = string.Empty;
-            foreach (var i in values)
+            string result = "#";
+            foreach (var value in values)
             {
-                result += ToHex(i);
+                result += $"{value:X2}";
             }
             return result;
         }
