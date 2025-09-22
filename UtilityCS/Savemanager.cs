@@ -15,7 +15,8 @@ namespace UtilityCS
         private static string CreatePathFromType<T>(string key) 
             => Filemanager.CombinePathWithExtension(Extension.json, MainPath, MainPath, typeof(T).Name, key);
 
-        public static int GetFilesCount() => Filemanager.GetDirectoryFiles(MainPath, true).Length;
+        public static int GetSavedFilesCount() => Filemanager.GetDirectoryFiles(MainPath, true).Length;
+        public static string[] GetSavedFilesPath() => Filemanager.GetDirectoryFiles(MainPath, true);
 
         public static void ClearAll(bool filesOnly = false) => Filemanager.DeleteAllDirectories(MainPath, filesOnly);
 
