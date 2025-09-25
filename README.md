@@ -1,5 +1,5 @@
 # C# Utility Library 
-UtilityCS is a wide-range C# library
+A wide-range C# library
 
 ## Usage
 - Serializing and Deserializing Data
