@@ -1,7 +1,7 @@
 ﻿
 namespace UtilityCS
 {
-    public enum MemoryUnit
+    public enum MemoryUnit : ulong
     {
         Bit = 1,
         Byte = 1,
@@ -11,7 +11,7 @@ namespace UtilityCS
     }
     public enum Extension
     {
-        txt, json, dat, bin, png
+        txt, json, dat, bin
     }
 
     public static class Filemanager
@@ -19,19 +19,32 @@ namespace UtilityCS
         public static string DesktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         public static string LocalAppFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        public static string FromGameFolder(params string[] strings) => Path.Combine(LocalAppFolder, Path.Combine(strings));
-        public static string FromGameFolder(Extension extension, params string[] strings) => SetExtensionPath(Path.Combine(LocalAppFolder, Path.Combine(strings)), extension);
-        public static string SetExtensionPath(string path, Extension dataType) => Path.ChangeExtension(path, dataType.ToString());
-        public static float GetFileSize(string path, MemoryUnit memoryUnit)
+        public static string FromLocalAppFolder(params string[] paths) => Path.Combine(LocalAppFolder, Path.Combine(paths));
+        public static string CombinePathWithExtension(Extension extension, params string[] paths) => Path.ChangeExtension(Path.Combine(paths), extension.ToString());
+        public static string RemoveLastPathSegment(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return path;
+
+            string trimmed = path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string parent = Path.GetDirectoryName(trimmed) ?? string.Empty;
+            if (string.IsNullOrEmpty(parent) && Path.IsPathRooted(trimmed))
+                return Path.GetPathRoot(trimmed) ?? string.Empty;
+
+            return parent;
+        }
+
+        public static double GetFileSize(string path, MemoryUnit memoryUnit)
         {
             if (File.Exists(path))
             {
                 long fileSizeInBytes = new FileInfo(path).Length;
-                return fileSizeInBytes / (float)((int)memoryUnit);
+                return fileSizeInBytes / (double)memoryUnit;
             }
 
             return -1;
         }
+
         public static void DeleteAllFromDirectory(string directoryPath, bool onlyFiles)
         {
             if (Directory.GetDirectories(directoryPath).Length > 0)
@@ -64,31 +77,17 @@ namespace UtilityCS
             }
         }
 
-        public static string[] GetDirectoryFiles(string directoryPath) => Directory.GetFiles(directoryPath);
-        public static string[] GetDirectories(string path) => Directory.GetDirectories(path);
-        public static string[] GetDirectoryFilesRecursive(string path)
+        public static string[] GetDirectoryFiles(string dirPath, bool recursive = false) => recursive ? GetDirectoryFilesRecursive(dirPath) : Directory.GetFiles(dirPath);
+        private static string[] GetDirectoryFilesRecursive(string dirPath)
         {
             List<string> files = new List<string>();
 
-            foreach (var dir in GetDirectories(path))
+            foreach (var dir in Directory.GetDirectories(dirPath))
             {
                 files.AddRange(GetDirectoryFiles(dir));
             }
 
             return files.ToArray();
-        }
-
-        public static string RemoveLastPathSegment(string path)
-        {
-            if (string.IsNullOrEmpty(path))
-                return path;
-
-            string trimmed = path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-            string parent = Path.GetDirectoryName(trimmed) ?? string.Empty;
-            if (string.IsNullOrEmpty(parent) && Path.IsPathRooted(trimmed))
-                return Path.GetPathRoot(trimmed) ?? string.Empty;
-
-            return parent;
         }
     }
 }

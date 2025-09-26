@@ -14,6 +14,31 @@ namespace UtilityCS
             return default;
         }
 
+        public static int IndexOf<T>(T[] array, T obj)
+        {
+            int i = 0;
+
+            foreach (var item in array)
+            {
+                if (item.Equals(obj)) return i;
+                i++;
+            }
+
+            return -1;
+        }
+        public static int IndexOf<T>(T[] array, Func<T, bool> predicate)
+        {
+            int i = 0;
+
+            foreach (var item in array)
+            {
+                if (predicate(item)) return i;
+                i++;
+            }
+
+            return -1;
+        }
+
         public static TResult[] Select<T, TResult>(this T[] array, Func<T, TResult> selector)
         {
             var result = new TResult[array.Length];
@@ -53,15 +78,6 @@ namespace UtilityCS
 
             return false;
         }
-        public static T2[] As<T, T2>(T[] array, Func<T, T2> selector)
-        {
-            var result = new T2[array.Length];
-            for (int i = 0; i < array.Length; i++)
-            {
-                result[i] = selector(array[i]);
-            }
-            return result;
-        }
         #endregion
 
         #region List
@@ -73,6 +89,31 @@ namespace UtilityCS
             }
 
             return default;
+        }
+
+        public static int IndexOf<T>(List<T> list, T obj)
+        {
+            int i = 0;
+
+            foreach (var item in list)
+            {
+                if (item.Equals(obj)) return i;
+                i++;
+            }
+
+            return -1;
+        }
+        public static int IndexOf<T>(List<T> list, Func<T, bool> predicate)
+        {
+            int i = 0;
+
+            foreach (var item in list)
+            {
+                if (predicate(item)) return i;
+                i++;
+            }
+
+            return -1;
         }
 
         public static TResult[] Select<T, TResult>(this List<T> list, Func<T, TResult> selector)
@@ -112,15 +153,6 @@ namespace UtilityCS
             }
 
             return false;
-        }
-        public static List<T2> As<T, T2>(List<T> list, Func<T, T2> selector)
-        {
-            var result = new List<T2>(list.Count);
-            for (int i = 0; i < list.Count; i++)
-            {
-                result[i] = selector(list[i]);
-            }
-            return result;
         }
         #endregion
     }

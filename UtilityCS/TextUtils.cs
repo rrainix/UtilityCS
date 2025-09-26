@@ -6,7 +6,7 @@ namespace UtilityCS
 {
     public enum FilterOption { Digits, Letters, Alphanumeric };
 
-    public class TextUtils
+    public static class TextUtils
     {
         public const string DIGITS = "0123456789";
         public const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -27,14 +27,14 @@ namespace UtilityCS
             return allowedChars.ToArray();
         }
 
-        public static string ToHex(int s) => $"#{s:X2}";
-        public static string ToHex(long s) => $"#{s:X2}";
+        public static string ToHex(int value) => $"#{value:X2}";
+        public static string ToHex(long value) => $"#{value:X2}";
         public static string ToHex(params int[] values)
         {
-            string result = string.Empty;
-            foreach (var i in values)
+            string result = "#";
+            foreach (var value in values)
             {
-                result += ToHex(i);
+                result += $"{value:X2}";
             }
             return result;
         }
@@ -51,7 +51,7 @@ namespace UtilityCS
 
         public static int WordsCount(string s) => s.Split(' ').Length;
 
-        public static string ColoredString(string text, string hexColor) // Note: Only useable when rich text editing is beeing supported
+        public static string ToColoredString(string text, string hexColor) // Note: Only useable when rich text editing is beeing supported
         {
             return $"<color=#{hexColor}>{text}</color>";
         }

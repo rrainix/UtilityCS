@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Text.Json;
 
 namespace UtilityCS
 {
@@ -9,32 +10,13 @@ namespace UtilityCS
 
     public static class SaveManager
     {
-        private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
-        {
-            IncludeFields = true,
-            PropertyNameCaseInsensitive = true,
-            WriteIndented = false
-        };
-        public static readonly string MainPath = Filemanager.FromGameFolder("SaveManager Storage");
+        public static readonly string MainPath = Filemanager.FromLocalAppFolder("SaveManager Storage");
 
-        public static string GetType<T>()
-        {
-            Type type = typeof(T);
+        private static string CreatePathFromType<T>(string key) 
+            => Filemanager.CombinePathWithExtension(Extension.json, MainPath, MainPath, typeof(T).Name, key);
 
-            if (type.IsClass)
-                return "Class";
-            else if (type.IsValueType && !type.IsPrimitive)
-                return "Nonprimtive Struct";
-            else if (type.IsValueType)
-                return "Primitive Struct";
-            else
-                return "Undefined Type";
-        }
-
-        private static string CreatePathFromType<T>(string key)
-            => Filemanager.SetExtensionPath(Path.Combine(MainPath, MainPath, GetType<T>().ToString(), typeof(T).Name, key), Extension.json);
-
-        public static int FilesCount => Filemanager.GetDirectoryFilesRecursive(MainPath).Length;
+        public static int GetSavedFilesCount() => Filemanager.GetDirectoryFiles(MainPath, true).Length;
+        public static string[] GetSavedFilesPath() => Filemanager.GetDirectoryFiles(MainPath, true);
 
         public static void ClearAll(bool filesOnly = false) => Filemanager.DeleteAllDirectories(MainPath, filesOnly);
 
@@ -50,42 +32,12 @@ namespace UtilityCS
         public static void Save<T>(string key, T obj, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
-            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-            using FileStream fs = new FileStream(
-                path, FileMode.Create, FileAccess.Write, FileShare.None,
-                bufferSize: 1 << 20, FileOptions.SequentialScan);
-
-            options ??= jsonOptions;
-
-            using (fs)
-            {
-                System.Text.Json.JsonSerializer.Serialize(fs, obj, options);
-            }
+            Serializer.Json.SaveObject(path, obj, options);
         }
         public static T Load<T>(string key, T defaultValue = default!, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
-
-            if (!File.Exists(path)) return defaultValue;
-
-            using FileStream fs = new FileStream(
-                path, FileMode.Open, FileAccess.Read, FileShare.Read,
-                bufferSize: 1 << 20, FileOptions.SequentialScan);
-
-            options ??= jsonOptions;
-
-            using (fs)
-            {
-                try
-                {
-                    return System.Text.Json.JsonSerializer.Deserialize<T>(fs, options)!
-                               ?? throw new InvalidDataException("Deserialization resulted in null");
-                }
-                catch
-                {
-                    return defaultValue;
-                }
-            }
+            return Serializer.Json.LoadObject<T>(path, options: options);
         }
     }
 }
