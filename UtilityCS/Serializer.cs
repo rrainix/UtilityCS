@@ -14,12 +14,20 @@ namespace UtilityCS
             PropertyNameCaseInsensitive = true,
             WriteIndented = false
         };
+        public static readonly JsonSerializerOptions FormatedJson = new JsonSerializerOptions
+        {
+            IncludeFields = true,
+            PropertyNameCaseInsensitive = true,
+            WriteIndented = true
+        };
 
         public static class Binary
         {
             public static void SaveUnmanagedBlock<T>(string path, ReadOnlySpan<T> span, CompressionLevel level = CompressionLevel.Fastest) where T : unmanaged
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                string dirPath = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dirPath))
+                    Directory.CreateDirectory(dirPath);
 
                 using var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 1 << 20, FileOptions.SequentialScan);
                 using var gzip = new GZipStream(fs, level, leaveOpen: false);
@@ -73,7 +81,9 @@ namespace UtilityCS
 
             public static void SaveObject<T>(string path, T item, CompressionLevel compressionLevel = CompressionLevel.Fastest, JsonSerializerOptions? options = null)
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+                string dirPath = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dirPath))
+                    Directory.CreateDirectory(dirPath);
 
                 using var fs = new FileStream(
                     path,
@@ -113,7 +123,9 @@ namespace UtilityCS
         {
             public static void SaveObject<T>(string path, T obj, JsonSerializerOptions? options = null)
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+                string dirPath = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dirPath))
+                    Directory.CreateDirectory(dirPath);
 
                 using FileStream fs = new FileStream(
                     path, FileMode.Create, FileAccess.Write, FileShare.None,
@@ -159,6 +171,10 @@ namespace UtilityCS
 
             public static void SaveObject<T>(string path, string password, T obj, JsonSerializerOptions? options = null)
             {
+                string dirPath = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dirPath))
+                    Directory.CreateDirectory(dirPath);
+
                 using FileStream fs = new FileStream(
                     path,
                     FileMode.Create,
