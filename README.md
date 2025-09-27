@@ -12,4 +12,4 @@ A wide-range C# utility library
 
 ## How to use
 - Clone with `git clone https://github.com/Ben-Scr/UtilityCS`
-- Include `UtilityCS.csproj` into your project or test the features directly in the `UtilityPlayground.csproj`.
+- Add `UtilityCS.csproj` to your project or test the features directly in the `UtilityPlayground.csproj`.
