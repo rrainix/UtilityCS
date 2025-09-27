@@ -11,4 +11,5 @@ A wide-range C# utility library
 - CMD Utils
 
 ## How to use
-Clone with `git clone https://github.com/Ben-Scr/UtilityCS` and compile.
+- Clone with `git clone https://github.com/Ben-Scr/UtilityCS`
+- Include `UtilityCS.csproj` into your project or test the features directly in the `UtilityPlayground.csproj`.
