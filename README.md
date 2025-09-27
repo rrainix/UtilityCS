@@ -9,3 +9,6 @@ A wide-range C# utility library
 - Logging
 - Mini LINQ
 - CMD Utils
+
+## How to use
+Clone with `git clone https://github.com/Ben-Scr/UtilityCS` and compile.
