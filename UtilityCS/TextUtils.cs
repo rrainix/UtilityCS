@@ -1,7 +1,5 @@
 ﻿
 
-using System.Drawing;
-
 namespace UtilityCS
 {
     public enum FilterOption { Digits, Letters, Alphanumeric };
