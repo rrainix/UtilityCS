@@ -1,5 +1,5 @@
 # C# Utility Library 
-A wide-range C# utility library
+A wide-range `Net 9.0` C# utility library
 
 ## Usage
 - Serializing and Deserializing Data (JSON, XML, BINARY)
@@ -11,5 +11,5 @@ A wide-range C# utility library
 - CMD Utils
 
 ## How to use
-- Clone with `git clone https://github.com/Ben-Scr/UtilityCS`
+- Clone with `https://github.com/Ben-Scr/UtilityCS`
 - Add `UtilityCS.csproj` to your project or test the features directly in the `UtilityPlayground.csproj`.
