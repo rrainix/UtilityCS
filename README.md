@@ -2,7 +2,7 @@
 A wide-range C# utility library
 
 ## Usage
-- Serializing and Deserializing Data
+- Serializing and Deserializing Data (JSON, XML, BINARY)
 - File Management
 - Randomization
 - Mathematics
