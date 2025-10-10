@@ -24,15 +24,19 @@ namespace UtilityCS
         {
             ShutdownCommand("/r /t", afterSeconds);
         }
-
         private static void ShutdownCommand(string args, int afterSeconds = 0)
         {
-            Process.Start("shutdown", $"{args} {(afterSeconds == 0 ?  "": afterSeconds.ToString())}");
+            Process.Start("shutdown", $"{args} {(afterSeconds == 0 ? "" : afterSeconds.ToString())}");
         }
 
         public static void Run(string filename)
         {
             Process.Start(filename);
+        }
+
+        public static void OpenExplorerAt(string path = "")
+        {
+            Process.Start("explorer.exe", path);
         }
     }
 }

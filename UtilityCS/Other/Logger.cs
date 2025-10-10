@@ -18,7 +18,7 @@ namespace UtilityCS
             Console.WriteLine(text);
             Console.ForegroundColor = oldColor;
         }
-        public static void Message(string message, string topic = "") => LogInternal(LogType.Message, "", message);
+        public static void Message(string message) => LogInternal(LogType.Message, "", message);
         public static void Info(string message, string topic = "") => LogInternal(LogType.Info, topic, message);
         public static void Warning(string message, string topic = "") => LogInternal(LogType.Warning, topic, message);
         public static void Error(string message, string topic = "") => LogInternal(LogType.Error, topic, message);
@@ -26,7 +26,8 @@ namespace UtilityCS
         private static void LogInternal(LogType type, string message, string topic = "")
         {
             string timestamp = DateTime.Now.ToString("HH:mm:ss");
-            string formatted = $"[{timestamp}][{type}]{(topic == "" ? "" : $"[{topic}]")} {message}";
+            string topicFormatted = topic == "" ? "" : $"[{topic}]";
+            string formatted = $"[{timestamp}][{type}]{topicFormatted} {message}";
 
             switch (type)
             {
