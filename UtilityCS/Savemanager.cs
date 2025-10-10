@@ -31,12 +31,12 @@ namespace UtilityCS
         public static void Save<T>(string key, T obj, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
-            Serializer.Json.SaveObject(path, obj, options);
+            Serializer.Json.Serialize(path, obj, options);
         }
         public static T Load<T>(string key, T defaultValue = default!, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
-            return Serializer.Json.LoadObject<T>(path, options: options);
+            return Serializer.Json.Deserialize<T>(path, options: options);
         }
     }
 }

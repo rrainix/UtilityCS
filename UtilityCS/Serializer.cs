@@ -1,14 +1,17 @@
 ﻿using System.Buffers.Binary;
+using System.IO;
 using System.IO.Compression;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Xml.Serialization;
 
 namespace UtilityCS
 {
     public static class Serializer
     {
-        private static readonly JsonSerializerOptions defaultJsonOptions = new JsonSerializerOptions
+        public static readonly JsonSerializerOptions DefaultJson = new JsonSerializerOptions
         {
             IncludeFields = true,
             PropertyNameCaseInsensitive = true,
@@ -23,7 +26,7 @@ namespace UtilityCS
 
         public static class Binary
         {
-            public static void SaveUnmanagedBlock<T>(string path, ReadOnlySpan<T> span, CompressionLevel level = CompressionLevel.Fastest) where T : unmanaged
+            public static void SerializeUnmanagedBlock<T>(string path, ReadOnlySpan<T> span, CompressionLevel level = CompressionLevel.Fastest) where T : unmanaged
             {
                 string dirPath = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dirPath))
@@ -41,7 +44,7 @@ namespace UtilityCS
                 ReadOnlySpan<byte> raw = MemoryMarshal.AsBytes(span);
                 gzip.Write(raw);
             }
-            public static ReadOnlySpan<T> LoadUnmanagedBlock<T>(string path) where T : unmanaged
+            public static ReadOnlySpan<T> DeserializeUnmanagedBlock<T>(string path) where T : unmanaged
             {
                 if (!File.Exists(path))
                     throw new FileNotFoundException($"File not found at path ({path})");
@@ -65,7 +68,7 @@ namespace UtilityCS
                 int count = BinaryPrimitives.ReadInt32LittleEndian(lenSpan);
 
 
-                int byteCount = count * Marshal.SizeOf<T>();
+                int byteCount = count * Unsafe.SizeOf<T>();
                 byte[] buffer = new byte[byteCount];
                 int offset = 0;
                 while (offset < byteCount)
@@ -78,8 +81,7 @@ namespace UtilityCS
 
                 return MemoryMarshal.Cast<byte, T>(buffer);
             }
-
-            public static void SaveObject<T>(string path, T item, CompressionLevel compressionLevel = CompressionLevel.Fastest, JsonSerializerOptions? options = null)
+            public static void Serialize<T>(string path, T item, CompressionLevel compressionLevel = CompressionLevel.Fastest, JsonSerializerOptions? options = null)
             {
                 string dirPath = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dirPath))
@@ -93,12 +95,12 @@ namespace UtilityCS
                     bufferSize: 1 << 20,
                     options: FileOptions.SequentialScan);
 
-                options ??= defaultJsonOptions;
+                options ??= DefaultJson;
 
                 using var gzip = new GZipStream(fs, compressionLevel, leaveOpen: false);
-                System.Text.Json.JsonSerializer.Serialize(gzip, item, defaultJsonOptions);
+                System.Text.Json.JsonSerializer.Serialize(gzip, item, DefaultJson);
             }
-            public static T LoadObject<T>(string path, JsonSerializerOptions? options = null)
+            public static T Deserialize<T>(string path, JsonSerializerOptions? options = null)
             {
                 if (!File.Exists(path))
                     throw new FileNotFoundException($"File not found at path ({path})");
@@ -111,17 +113,17 @@ namespace UtilityCS
                     bufferSize: 1 << 20,
                     options: FileOptions.SequentialScan);
 
-                options ??= defaultJsonOptions;
+                options ??= DefaultJson;
 
                 using var gzip = new GZipStream(fs, CompressionMode.Decompress, leaveOpen: false);
 
-                return System.Text.Json.JsonSerializer.Deserialize<T>(gzip, defaultJsonOptions)
+                return System.Text.Json.JsonSerializer.Deserialize<T>(gzip, DefaultJson)
                        ?? throw new InvalidDataException("Deserialization resulted in null");
             }
         }
         public static class Json
         {
-            public static void SaveObject<T>(string path, T obj, JsonSerializerOptions? options = null)
+            public static void Serialize<T>(string path, T obj, JsonSerializerOptions? options = null)
             {
                 string dirPath = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dirPath))
@@ -131,14 +133,14 @@ namespace UtilityCS
                     path, FileMode.Create, FileAccess.Write, FileShare.None,
                     bufferSize: 1 << 20, FileOptions.SequentialScan);
 
-                options ??= defaultJsonOptions;
+                options ??= DefaultJson;
 
                 using (fs)
                 {
                     System.Text.Json.JsonSerializer.Serialize(fs, obj, options);
                 }
             }
-            public static T LoadObject<T>(string path, T defaultValue = default!, JsonSerializerOptions? options = null)
+            public static T Deserialize<T>(string path, T defaultValue = default!, JsonSerializerOptions? options = null)
             {
                 if (!File.Exists(path)) return defaultValue;
 
@@ -146,14 +148,13 @@ namespace UtilityCS
                     path, FileMode.Open, FileAccess.Read, FileShare.Read,
                     bufferSize: 1 << 20, FileOptions.SequentialScan);
 
-                options ??= defaultJsonOptions;
+                options ??= DefaultJson;
 
                 using (fs)
                 {
                     try
                     {
-                        return System.Text.Json.JsonSerializer.Deserialize<T>(fs, options)!
-                               ?? throw new InvalidDataException("Deserialization resulted in null");
+                        return JsonSerializer.Deserialize<T>(fs, options)! ?? throw new InvalidDataException("Deserialization resulted in null");
                     }
                     catch
                     {
@@ -164,12 +165,12 @@ namespace UtilityCS
         }
         public static class JsonSecure
         {
-            private const int SaltSize = 16;
-            private const int IvSize = 16;
-            private const int KeySize = 32;
-            private const int Iterations = 100_000;
+            private const int saltSize = 16;
+            private const int ivSize = 16;
+            private const int keySize = 32;
+            private const int iterations = 100_000;
 
-            public static void SaveObject<T>(string path, string password, T obj, JsonSerializerOptions? options = null)
+            public static void Serialize<T>(string path, string password, T obj, JsonSerializerOptions? options = null)
             {
                 string dirPath = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dirPath))
@@ -183,20 +184,20 @@ namespace UtilityCS
                     bufferSize: 1 << 20,
                     options: FileOptions.SequentialScan);
 
-                options ??= defaultJsonOptions;
+                options ??= DefaultJson;
 
-                byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
-                byte[] iv = RandomNumberGenerator.GetBytes(IvSize);
+                byte[] salt = RandomNumberGenerator.GetBytes(saltSize);
+                byte[] iv = RandomNumberGenerator.GetBytes(ivSize);
 
-                using var kdf = new Rfc2898DeriveBytes(password, salt, Iterations, HashAlgorithmName.SHA256);
-                byte[] key = kdf.GetBytes(KeySize);
+                using var kdf = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
+                byte[] key = kdf.GetBytes(keySize);
 
                 fs.Write(salt);
                 fs.Write(iv);
 
                 using Aes aes = Aes.Create()!;
-                aes.KeySize = KeySize * 8;
-                aes.BlockSize = IvSize * 8;
+                aes.KeySize = keySize * 8;
+                aes.BlockSize = ivSize * 8;
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
                 aes.Key = key;
@@ -206,7 +207,7 @@ namespace UtilityCS
                 using var crypto = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write);
                 JsonSerializer.Serialize(crypto, obj, options);
             }
-            public static T LoadObject<T>(string path, string password, T defaultValue = default!, JsonSerializerOptions? options = null)
+            public static T Deserialize<T>(string path, string password, T defaultValue = default!, JsonSerializerOptions? options = null)
             {
                 if (!File.Exists(path))
                     return defaultValue;
@@ -221,19 +222,19 @@ namespace UtilityCS
                         bufferSize: 1 << 20,
                         options: FileOptions.SequentialScan);
 
-                    byte[] salt = new byte[SaltSize];
-                    byte[] iv = new byte[IvSize];
-                    if (fs.Read(salt) != SaltSize || fs.Read(iv) != IvSize)
+                    byte[] salt = new byte[saltSize];
+                    byte[] iv = new byte[ivSize];
+                    if (fs.Read(salt) != saltSize || fs.Read(iv) != ivSize)
                         throw new InvalidDataException("Invalid fileformat");
 
-                    options ??= defaultJsonOptions;
+                    options ??= DefaultJson;
 
-                    using var kdf = new Rfc2898DeriveBytes(password, salt, Iterations, HashAlgorithmName.SHA256);
-                    byte[] key = kdf.GetBytes(KeySize);
+                    using var kdf = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
+                    byte[] key = kdf.GetBytes(keySize);
 
                     using Aes aes = Aes.Create()!;
-                    aes.KeySize = KeySize * 8;
-                    aes.BlockSize = IvSize * 8;
+                    aes.KeySize = keySize * 8;
+                    aes.BlockSize = ivSize * 8;
                     aes.Mode = CipherMode.CBC;
                     aes.Padding = PaddingMode.PKCS7;
                     aes.Key = key;
@@ -248,6 +249,25 @@ namespace UtilityCS
                 {
                     throw new InvalidDataException("Wrong password or damaged file");
                 }
+            }
+        }
+        public static class Xml
+        {
+            public static void Serialize<T>(string path, T obj)
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                FileStream fs = new FileStream(path, FileMode.Create);
+                xmlSerializer.Serialize(fs, obj);
+                fs.Close();
+            }
+
+            public static T Deserialize<T>(string path)
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                FileStream fs = new FileStream(path, FileMode.Open);
+                T obj = (T)xmlSerializer.Deserialize(fs);
+                fs.Close();
+                return obj;
             }
         }
     }
