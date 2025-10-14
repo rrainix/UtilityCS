@@ -35,7 +35,7 @@ namespace UtilityCS
                     WriteColored(formatted, ConsoleColor.Green);
                     break;
                 case LogType.Message:
-                    WriteColored(formatted, ConsoleColor.White); break;
+                    WriteColored(formatted, ConsoleColor.Gray); break;
                 case LogType.Warning:
                     WriteColored(formatted, ConsoleColor.Yellow);
                     break;
