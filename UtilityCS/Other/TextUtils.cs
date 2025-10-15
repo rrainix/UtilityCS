@@ -1,14 +1,24 @@
 ﻿
 
+using System.Text.Json;
+
 namespace UtilityCS
 {
     public enum FilterOption { Digits, Letters, Alphanumeric };
 
+    public class Geodata
+    {
+
+    }
+
     public static class TextUtils
     {
         public const string DIGITS = "0123456789";
-        public const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        public const string SPACE = " ";
+        public const string LETTERS_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public const string LETTERS_LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+        public const string LETTERS = LETTERS_LOWERCASE + LETTERS_UPPERCASE;
+
+        public const char SPACE = ' ';
 
         public static string RemoveChars(string input, params char[] nonAllowedChars)
         {
