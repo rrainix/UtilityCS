@@ -1,4 +1,16 @@
 ﻿using UtilityCS;
+using System.Reflection;
+
+public class Geodata
+{
+    public float X;
+    public float Y;
+    public Geodata(float x , float y)
+    {
+        X = x; Y = y;
+    }
+}
+
 public class Program
 {
     public const string SEPERATOR = "------------------------";
@@ -11,6 +23,7 @@ public class Program
         Console.WriteLine(SEPERATOR);
         RandomPreview();
         Console.WriteLine(SEPERATOR);
+        Console.WriteLine(TypeUtility.GetValue<float, Vector2>("X", new Vector2(10.14f, 1)));
     }
 
     public static void SaveManagerPreview()
