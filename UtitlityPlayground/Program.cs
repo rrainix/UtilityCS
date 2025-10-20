@@ -23,7 +23,8 @@ public class Program
         Vector2 vec2 = new Vector2(10.14f, 1);
         string propertyName = "X";
 
-        float vec2X = TypeUtility.GetValue<float, Vector2>(propertyName, vec2);
+        float vec2X = TypeUtility.GetValueFromField<float, Vector2>(propertyName, vec2);
+        Console.WriteLine(vec2.X);
         Console.WriteLine(vec2X);
     }
 
