@@ -64,7 +64,7 @@ namespace UtilityCS
             return min + (NextDouble() * (max - min));
         }
 
-        public bool FlipCoin() => Next(0, 2) == 0;
+        public bool CoinFlip() => Next(0, 2) == 0;
 
         public bool Chance(float threshold, float max = 1.0f)
         {

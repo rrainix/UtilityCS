@@ -5,7 +5,7 @@ public class Geodata
 {
     public float X;
     public float Y;
-    public Geodata(float x , float y)
+    public Geodata(float x, float y)
     {
         X = x; Y = y;
     }
@@ -17,6 +17,12 @@ public class Program
 
     public static void Main(string[] args)
     {
+        RandomSecure randomSecure = new RandomSecure();
+
+        for (int i = 0; i < 10; i++)
+            Console.WriteLine(randomSecure.Code());
+
+
         SaveManagerPreview();
         Console.WriteLine(SEPERATOR);
         LoggerPreview();
