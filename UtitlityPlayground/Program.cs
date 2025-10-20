@@ -1,35 +1,30 @@
 ﻿using UtilityCS;
 using System.Reflection;
 
-public class Geodata
-{
-    public float X;
-    public float Y;
-    public Geodata(float x, float y)
-    {
-        X = x; Y = y;
-    }
-}
-
 public class Program
 {
     public const string SEPERATOR = "------------------------";
 
     public static void Main(string[] args)
     {
-        RandomSecure randomSecure = new RandomSecure();
-
-        for (int i = 0; i < 10; i++)
-            Console.WriteLine(randomSecure.Code());
-
-
         SaveManagerPreview();
         Console.WriteLine(SEPERATOR);
         LoggerPreview();
         Console.WriteLine(SEPERATOR);
         RandomPreview();
         Console.WriteLine(SEPERATOR);
-        Console.WriteLine(TypeUtility.GetValue<float, Vector2>("X", new Vector2(10.14f, 1)));
+        TypeUtilityPreview();
+        Console.WriteLine(SEPERATOR);
+    }
+
+    public static void TypeUtilityPreview()
+    {
+        Console.WriteLine("-- Type Utility Preview --");
+        Vector2 vec2 = new Vector2(10.14f, 1);
+        string propertyName = "X";
+
+        float vec2X = TypeUtility.GetValue<float, Vector2>(propertyName, vec2);
+        Console.WriteLine(vec2X);
     }
 
     public static void SaveManagerPreview()
