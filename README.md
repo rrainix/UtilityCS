@@ -5,7 +5,7 @@ A wide-range `Net 9.0` C# Utility Library
 - Serializing and Deserializing Data (JSON, XML, BINARY)
 - File Management
 - Randomization
-- Encryption
+- Encryption and Decryption
 - Mathematics
 - Logging
 - Mini LINQ
