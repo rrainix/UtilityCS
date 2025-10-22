@@ -1,33 +1,22 @@
 ﻿using UtilityCS;
 using System.Reflection;
-using System.Text;
+using System.Diagnostics;
 
 public class Program
 {
     public const string SEPERATOR = "------------------------";
 
-    public class Account
-    {
-        public string User;
-        public string Password;
-    }
-
     public static void Main(string[] args)
     {
-
-        string msg = "Hello World";
-
-        string encrypted = Encryptor.String.Encrypt(msg);
-        string decrypted = Encryptor.String.Decrypt(encrypted);
-        Serializer.Json.Serialize()
-
-        Console.WriteLine(decrypted);
-
         SaveManagerPreview();
         Console.WriteLine(SEPERATOR);
         LoggerPreview();
         Console.WriteLine(SEPERATOR);
         RandomPreview();
+        Console.WriteLine(SEPERATOR);
+        RandomSecurePreview();
+        Console.WriteLine(SEPERATOR);
+        EncryptorPreview();
         Console.WriteLine(SEPERATOR);
         TypeUtilityPreview();
         Console.WriteLine(SEPERATOR);
@@ -75,5 +64,23 @@ public class Program
         RandomCS random = new RandomCS();
         Console.WriteLine($"Random between (0-1000): {random.Next(1000)}");
         Console.WriteLine($"Random between (0.0-10.0): {random.Next(0.0, 10.0)}");
+    }
+
+    public static void RandomSecurePreview()
+    {
+        Console.WriteLine("-- Random Secure Preview --");
+        RandomSecure randomSecure = new RandomSecure();
+        Console.WriteLine("Random between (0.0-10.0):" + randomSecure.Next(0, 10f));
+        Console.WriteLine("Random Code: " + randomSecure.GenerateCode(20));
+    }
+
+    public static void EncryptorPreview()
+    {
+        Console.WriteLine("-- Encryptor Preview --");
+        string message = "Hello World!";
+        string encrypedMessage = Encryptor.String.Encrypt(message);
+        Console.WriteLine($"Original Message: \"{message}\"");
+        Console.WriteLine($"Encrypted Message: \"{encrypedMessage}\"");
+        Console.WriteLine($"Decrypted Message: \"{Encryptor.String.Decrypt(encrypedMessage)}\"");
     }
 }

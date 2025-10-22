@@ -21,7 +21,7 @@ namespace UtilityCS
             public static bool CoinFlip() => randomSecure.CoinFlip();
             public static bool Chance(float threshold, float max = 1.0f) => randomSecure.Chance(threshold, max);
             public static double NextDouble() => randomSecure.Next(0.0, 1.0);
-            public static string Code() => randomSecure.Code();
+            public static string Code() => randomSecure.GenerateCode();
             public static void GenerateBytes(byte[] bytes) => randomSecure.GenerateBytes(bytes);
         }
     }
