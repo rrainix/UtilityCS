@@ -1,10 +1,11 @@
 # C# Utility Library 
-A wide-range `Net 9.0` C# utility library
+A wide-range `Net 9.0` C# Utility Library
 
 ## Usage
 - Serializing and Deserializing Data (JSON, XML, BINARY)
 - File Management
 - Randomization
+- Encryption
 - Mathematics
 - Logging
 - Mini LINQ
