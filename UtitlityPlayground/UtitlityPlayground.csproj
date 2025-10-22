@@ -9,6 +9,14 @@
 		<Product>Utility Playground</Product>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <WarningLevel>0</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <WarningLevel>0</WarningLevel>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\UtilityCS\UtilityCS.csproj" />
 	</ItemGroup>
