@@ -4,21 +4,48 @@ using System.Diagnostics;
 
 public class Program
 {
-    public const string SEPERATOR = "------------------------";
+    public const string SEPERATOR = "-----------------------------------";
+
+    public static Dictionary<string, Delegate> Previews = new()
+  {
+      { "Savemanager Preview", new Action(SaveManagerPreview) },
+      { "Random Preview", new Action(RandomPreview) },
+      { "Secure Random Preview", new Action(RandomSecurePreview) },
+      { "Enctyptor Preview", new Action(EncryptorPreview) },
+      { "Typeutility Preview", new Action(TypeUtilityPreview) }
+  };
 
     public static void Main(string[] args)
     {
-        SaveManagerPreview();
+        do
+        {
+            Console.Clear();
+            Console.WriteLine(SEPERATOR);
+            int i = 1;
+
+            foreach (var key in Previews.Keys)
+            {
+                var option = Previews[key];
+
+                if (option is Action action)
+                {
+                    Console.WriteLine($"Preview {i++}/{Previews.Count}");
+                    action();
+                    EnterForNextPreview();
+                }
+            }
+
+            Console.WriteLine("Would you like to continue? (Y/N)");
+        } while (Console.ReadLine().ToLower() == "y");
+
+    }
+
+    public static void EnterForNextPreview()
+    {
         Console.WriteLine(SEPERATOR);
-        LoggerPreview();
-        Console.WriteLine(SEPERATOR);
-        RandomPreview();
-        Console.WriteLine(SEPERATOR);
-        RandomSecurePreview();
-        Console.WriteLine(SEPERATOR);
-        EncryptorPreview();
-        Console.WriteLine(SEPERATOR);
-        TypeUtilityPreview();
+        Console.WriteLine("Press Enter to see the next preview");
+        Console.ReadLine();
+        Console.Clear();
         Console.WriteLine(SEPERATOR);
     }
 
