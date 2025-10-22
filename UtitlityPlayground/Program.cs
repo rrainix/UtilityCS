@@ -4,18 +4,23 @@ using System.Diagnostics;
 
 public class Program
 {
-    public const string SEPERATOR = "-----------------------------------";
+    private const string SEPERATOR = "-----------------------------------";
 
-    public static Dictionary<string, Delegate> Previews = new()
+    private static Dictionary<string, Delegate> previews = new()
   {
       { "Savemanager Preview", new Action(SaveManagerPreview) },
       { "Random Preview", new Action(RandomPreview) },
       { "Secure Random Preview", new Action(RandomSecurePreview) },
       { "Enctyptor Preview", new Action(EncryptorPreview) },
-      { "Typeutility Preview", new Action(TypeUtilityPreview) }
+      { "Type Utility Preview", new Action(TypeUtilityPreview) }
   };
 
     public static void Main(string[] args)
+    {
+        Run();
+    }
+
+    private static void Run()
     {
         do
         {
@@ -23,13 +28,12 @@ public class Program
             Console.WriteLine(SEPERATOR);
             int i = 1;
 
-            foreach (var key in Previews.Keys)
+            foreach (var key in previews.Keys)
             {
-                var option = Previews[key];
+                var option = previews[key];
 
                 if (option is Action action)
                 {
-                    Console.WriteLine($"Preview {i++}/{Previews.Count}");
                     action();
                     EnterForNextPreview();
                 }
@@ -37,7 +41,6 @@ public class Program
 
             Console.WriteLine("Would you like to continue? (Y/N)");
         } while (Console.ReadLine().ToLower() == "y");
-
     }
 
     public static void EnterForNextPreview()
