@@ -1,12 +1,28 @@
 ﻿using UtilityCS;
 using System.Reflection;
+using System.Text;
 
 public class Program
 {
     public const string SEPERATOR = "------------------------";
 
+    public class Account
+    {
+        public string User;
+        public string Password;
+    }
+
     public static void Main(string[] args)
     {
+
+        string msg = "Hello World";
+
+        string encrypted = Encryptor.String.Encrypt(msg);
+        string decrypted = Encryptor.String.Decrypt(encrypted);
+        Serializer.Json.Serialize()
+
+        Console.WriteLine(decrypted);
+
         SaveManagerPreview();
         Console.WriteLine(SEPERATOR);
         LoggerPreview();

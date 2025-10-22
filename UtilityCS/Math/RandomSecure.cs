@@ -56,5 +56,10 @@ namespace UtilityCS
 
             return code;
         }
+
+        public void GenerateBytes(byte[] bytes)
+        {
+            randomNumberGenerator.GetBytes(bytes);
+        }
     }
 }
