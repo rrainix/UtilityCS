@@ -12,7 +12,8 @@ public class Program
       { "Random Preview", new Action(RandomPreview) },
       { "Secure Random Preview", new Action(RandomSecurePreview) },
       { "Enctyptor Preview", new Action(EncryptorPreview) },
-      { "Type Utility Preview", new Action(TypeUtilityPreview) }
+      { "Type Utility Preview", new Action(TypeUtilityPreview) },
+      { "Password Generator Preview", new Action(PasswordPreview) }
   };
 
     public static void Main(string[] args)
@@ -25,8 +26,8 @@ public class Program
         do
         {
             Console.Clear();
-            Console.WriteLine(SEPERATOR);
             int i = 1;
+            Console.WriteLine(SEPERATOR);
 
             foreach (var key in previews.Keys)
             {
@@ -34,6 +35,7 @@ public class Program
 
                 if (option is Action action)
                 {
+                    Console.WriteLine($"({i++}/{previews.Count})");
                     action();
                     EnterForNextPreview();
                 }
@@ -101,7 +103,6 @@ public class Program
         Console.WriteLine("-- Random Secure Preview --");
         RandomSecure randomSecure = new RandomSecure();
         Console.WriteLine("Random between (0.0-10.0):" + randomSecure.Next(0, 10f));
-        Console.WriteLine("Random Code: " + randomSecure.GenerateCode(20));
     }
 
     public static void EncryptorPreview()
@@ -112,5 +113,19 @@ public class Program
         Console.WriteLine($"Original Message: \"{message}\"");
         Console.WriteLine($"Encrypted Message: \"{encrypedMessage}\"");
         Console.WriteLine($"Decrypted Message: \"{Encryptor.String.Decrypt(encrypedMessage)}\"");
+    }
+
+    public static void PasswordPreview()
+    {
+        Console.WriteLine("-- Password Generator Preview --");
+        Password password = Password.Default();
+        Console.WriteLine($"Password 1 Settings {password.ToString()}");
+        Console.Write("Generated Password ");
+        Console.Write(password.Next() + '\n');
+
+        Password password2 = new Password().IncludeDigits().IncludeLowercase().LengthRequired(30);
+        Console.WriteLine($"Password 2 Settings {password2.ToString()}");
+        Console.Write("Generated Password ");
+        Console.Write(password2.Next() + '\n');
     }
 }
