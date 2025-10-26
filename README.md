@@ -26,6 +26,7 @@ A wide-range `Net 9.0` C# Utility Library
    dotnet add package UtilityCS
 
 ## Technology
-<img src="Docs/NET 9.0 Zoomed.png" width="10%"  align="center">
-<img src="Docs/C# 13.0 Zoomed.png" width="10%"  align="center">
-
+<p align="center">
+<img src="Docs/NET 9.0 Zoomed.png" width="10%">
+<img src="Docs/C# 13.0 Zoomed.png" width="10%">
+</p>
