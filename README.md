@@ -1,4 +1,4 @@
-# C# Utility Library <img src="UtilityCS/logo.png" width="3%" align="center"/>
+# C# Utility Library
 A wide-range `Net 9.0` C# Utility Library
 
 ## Usage
@@ -29,4 +29,5 @@ A wide-range `Net 9.0` C# Utility Library
 <p align="center">
 <img src="Docs/NET 9.0 Zoomed.png" width="15%">
 <img src="Docs/CS 13.0 Zoomed.png" width="15%">
+   <img src="UtilityCS/icon.png" width="15%">
 </p>
