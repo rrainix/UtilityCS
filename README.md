@@ -6,6 +6,7 @@ A wide-range `Net 9.0` C# Utility Library
 - File Management
 - Randomization
 - Encryption and Decryption
+- Password Generation
 - Mathematics
 - Logging
 - Mini LINQ
