@@ -13,5 +13,19 @@ A wide-range `Net 9.0` C# Utility Library
 - CMD Utils
 
 ## How to use
-- Clone with `https://github.com/Ben-Scr/UtilityCS`
-- Add `UtilityCS.csproj` to your project or test the features directly in the `UtilityPlayground.csproj`.
+
+### Option 1 - Clone the Repository
+1. Clone with  
+   `https://github.com/Ben-Scr/UtilityCS`
+2. Add `UtilityCS.csproj` to your project  
+   **or** test the features directly in `UtilityPlayground.csproj`.
+
+### Option 2 - Install via NuGet
+1. Install the package from NuGet:
+   ```bash
+   dotnet add package UtilityCS
+
+## Technology
+<img src="Docs/NET 9.0 Zoomed.png" width="10%"  align="center">
+<img src="Docs/C# 13.0 Zoomed.png" width="10%"  align="center">
+
