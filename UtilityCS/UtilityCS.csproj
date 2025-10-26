@@ -15,7 +15,7 @@
 		<RepositoryType>git</RepositoryType>
 		
 		<PackageTags>Serialization; Encryption; Random; Math; File Management</PackageTags>
-		<PackageLicenseExpression>LICENSE</PackageLicenseExpression>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
@@ -24,6 +24,6 @@
 	<ItemGroup>
 		<None Include="../README.md" Pack="true" PackagePath="\" />
 		<None Include="../LICENSE.txt" Pack="true" PackagePath="\" />
-		<None Include="../logo.png" Pack="true" PackagePath="\" />
+		<None Include="logo.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>
