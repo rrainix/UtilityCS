@@ -27,6 +27,6 @@ A wide-range `Net 9.0` C# Utility Library
 
 ## Technology
 <p align="center">
-<img src="Docs/NET 9.0 Zoomed.png" width="10%">
-<img src="Docs/C# 13.0 Zoomed.png" width="10%">
+<img src="Docs/NET 9.0 Zoomed.png" width="15%">
+<img src="Docs/CS 13.0 Zoomed.png" width="15%">
 </p>
