@@ -1,4 +1,4 @@
-# C# Utility Library <img src="Docs/CSIcon.png" width="3%" align="center"/>
+# C# Utility Library
 A wide-range `Net 9.0` C# Utility Library
 
 ## Usage
