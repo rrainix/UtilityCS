@@ -1,11 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<PackageId>UtilityCS</PackageId>
+		<Version>1.0.0</Version>
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<Authors>Ben Schneider</Authors>
 		<Company>Ben Schneider</Company>
-		<Product>Utility Library</Product>
+		<Description>Wide Range C# Utility Library</Description>
+		
+		<PackageProjectUrl>https://github.com/Ben-Scr/UtilityCS</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Ben-Scr/UtilityCS</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		
+		<PackageTags>Serialization; Encryption; Random; Math; File Management</PackageTags>
+		<PackageLicenseExpression>LICENSE</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
 
+
+	<ItemGroup>
+		<None Include="../README.md" Pack="true" PackagePath="\" />
+		<None Include="../LICENSE.txt" Pack="true" PackagePath="\" />
+		<None Include="../logo.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
 </Project>
