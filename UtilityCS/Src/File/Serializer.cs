@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Xml.Serialization;
 
-namespace BenScr.File
+namespace BenScr.IO
 {
     public static class Serializer
     {

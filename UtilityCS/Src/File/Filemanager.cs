@@ -1,5 +1,5 @@
 ﻿
-namespace BenScr.File
+namespace BenScr.IO
 {
     public enum MemoryUnit : ulong
     {

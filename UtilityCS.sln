@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityCS", "UtilityCS\UtilityCS.csproj", "{BC0C734D-08CF-4595-9AFE-DC3B048B45FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtitlityPlayground", "UtitlityPlayground\UtitlityPlayground.csproj", "{04596BC6-CF16-47B6-921A-65DEEA8B1FAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "UtitlityPlayground\Playground.csproj", "{04596BC6-CF16-47B6-921A-65DEEA8B1FAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
