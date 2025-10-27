@@ -25,6 +25,19 @@ A wide-range `Net 9.0` C# Utility Library
    ```bash
    dotnet add package UtilityCS
 
+## Namespaces
+```csharp
+using BenScr.Collections;
+using BenScr.Math;
+using BenScr.Security.Cryptography;
+using BenScr.Diagnostics;
+using BenScr.IO;
+using BenScr.Linq;
+using BenScr.Reflection;
+using BenScr.Text;
+using BenScr.Debugging;
+```
+
 ## Technology
 <p align="center">
 <img src="Docs/NET 9.0 Zoomed.png" width="15%">
