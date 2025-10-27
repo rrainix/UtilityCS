@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<PackageId>UtilityCS</PackageId>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -15,11 +15,11 @@
 		<RepositoryType>git</RepositoryType>
 		
 		<PackageTags>
-			Serialization/Deserialization (JSON, XML, BINARY);
+			Serialization/Deserialization (Json, Xml, Binary);
 			Encryption/Decryption (AES);
 			Randomization;
-			Password Generation;
 			Mathematics;
+			Cryptography;
 			File Management;
 			Logging;
 			Mini LINQ;
