@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 using BenScr.Collections;
 using BenScr.Math;
+using BenScr.Random;
 using BenScr.Security.Cryptography;
 using BenScr.Diagnostics;
 using BenScr.IO;

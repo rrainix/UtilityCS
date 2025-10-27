@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace BenScr.Math
+namespace BenScr.Random
 {
     public class RandomCS
     {

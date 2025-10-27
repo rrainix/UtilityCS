@@ -1,6 +1,6 @@
 ﻿using BenScr.Security.Cryptography;
 
-namespace BenScr.Math
+namespace BenScr.Random
 {
     public static class RandomHandler
     {
