@@ -31,6 +31,7 @@ Take a look at [`Playground/Program.cs`](Playground/Program.cs)
 ```csharp
 using BenScr.Collections;
 using BenScr.Math;
+using BenScr.Random;
 using BenScr.Security.Cryptography;
 using BenScr.Diagnostics;
 using BenScr.IO;
