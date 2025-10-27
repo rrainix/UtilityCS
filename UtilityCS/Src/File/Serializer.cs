@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace BenScr.IO
 {
-    public static class Serializer
+    internal static class Serializer
     {
         public static readonly JsonSerializerOptions DefaultJson = new JsonSerializerOptions
         {

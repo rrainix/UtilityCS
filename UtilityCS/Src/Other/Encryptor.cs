@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace BenScr.Cryptography
+namespace BenScr.Security.Cryptography
 {
     public static class Encryptor
     {

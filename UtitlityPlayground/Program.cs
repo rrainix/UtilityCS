@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 using BenScr.Collections;
 using BenScr.Math;
-using BenScr.Cryptography;
+using BenScr.Security.Cryptography;
 using BenScr.Diagnostics;
 using BenScr.IO;
 using BenScr.Linq;
@@ -22,7 +22,6 @@ public class Program
       { "Secure Random Preview", new Action(RandomSecurePreview) },
       { "Enctyptor Preview", new Action(EncryptorPreview) },
       { "Type Utility Preview", new Action(TypeUtilityPreview) },
-      { "Password Generator Preview", new Action(PasswordPreview) }
   };
 
     public static void Main(string[] args)
@@ -122,19 +121,5 @@ public class Program
         Console.WriteLine($"Original Message: \"{message}\"");
         Console.WriteLine($"Encrypted Message: \"{encrypedMessage}\"");
         Console.WriteLine($"Decrypted Message: \"{Encryptor.String.Decrypt(encrypedMessage)}\"");
-    }
-
-    public static void PasswordPreview()
-    {
-        Console.WriteLine("-- Password Generator Preview --");
-        Password password = Password.Default();
-        Console.WriteLine($"Password 1 Settings {password.ToString()}");
-        Console.Write("Generated Password ");
-        Console.Write(password.Next() + '\n');
-
-        Password password2 = new Password().IncludeDigits().IncludeLowercase().LengthRequired(30);
-        Console.WriteLine($"Password 2 Settings {password2.ToString()}");
-        Console.Write("Generated Password ");
-        Console.Write(password2.Next() + '\n');
     }
 }

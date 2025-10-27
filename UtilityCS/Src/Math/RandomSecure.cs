@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace BenScr.Cryptography
+namespace BenScr.Security.Cryptography
 {
     public class RandomSecure
     {
