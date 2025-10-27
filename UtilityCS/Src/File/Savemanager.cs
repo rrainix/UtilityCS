@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace UtilityCS
+namespace BenScr.File
 {
     // Savemanager is a highlevel class simply used for saving and loading data generically.
     // Usage example:

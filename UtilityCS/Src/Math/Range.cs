@@ -1,5 +1,5 @@
 ﻿
-namespace UtilityCS
+namespace BenScr.Collections
 {
     public struct Range
     {

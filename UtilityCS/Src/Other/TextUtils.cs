@@ -1,15 +1,7 @@
 ﻿
-
-using System.Text.Json;
-
-namespace UtilityCS
+namespace BenScr.Text
 {
     public enum FilterOption { Digits, Letters, Alphanumeric };
-
-    public class Geodata
-    {
-
-    }
 
     public static class TextUtils
     {

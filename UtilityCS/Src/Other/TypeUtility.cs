@@ -1,8 +1,6 @@
-﻿
+﻿using System.Reflection;
 
-using System.Reflection;
-
-namespace UtilityCS
+namespace BenScr.Reflection
 {
     public class TypeUtility
     {
@@ -14,7 +12,7 @@ namespace UtilityCS
         }
         public static string[] GetFieldNames<T>()
         {
-            return MiniLinq.Select(typeof(T).GetFields(BindingFlags), p => p.Name).ToArray();
+            return Linq.MiniLinq.Select(typeof(T).GetFields(BindingFlags), p => p.Name).ToArray();
         }
         public static T GetValueFromField<T, T2>(string fieldName, T2 obj)
         {

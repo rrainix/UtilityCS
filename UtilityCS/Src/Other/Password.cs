@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace UtilityCS
+namespace BenScr.Cryptography
 {
     [Flags]
     public enum IncludeFlags

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace UtilityCS
+namespace BenScr.Collections
 {
     public struct Vector2
     {

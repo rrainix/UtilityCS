@@ -1,5 +1,5 @@
 ﻿
-namespace UtilityCS
+namespace BenScr.Math
 {
     public static class Trigonometry
     {

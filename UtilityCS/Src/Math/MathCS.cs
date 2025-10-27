@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace UtilityCS
+namespace BenScr.Math
 {
     public static class MathCS
     {

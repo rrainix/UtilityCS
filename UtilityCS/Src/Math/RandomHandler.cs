@@ -1,5 +1,6 @@
-﻿
-namespace UtilityCS
+﻿using BenScr.Security.Random;
+
+namespace BenScr.Math
 {
     public static class RandomHandler
     {

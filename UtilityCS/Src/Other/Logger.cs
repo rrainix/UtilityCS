@@ -1,5 +1,5 @@
 ﻿
-namespace UtilityCS
+namespace BenScr.Debugging
 {
     // Logger is a highlevel console logging class, used for efficient debugging
     // Usage example:

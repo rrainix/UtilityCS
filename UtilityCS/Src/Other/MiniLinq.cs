@@ -1,5 +1,5 @@
 ﻿
-namespace UtilityCS
+namespace BenScr.Linq
 {
     public static class MiniLinq
     {
