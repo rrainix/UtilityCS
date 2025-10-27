@@ -1,4 +1,4 @@
-﻿using BenScr.Cryptography;
+﻿using BenScr.Security.Cryptography;
 
 namespace BenScr.Math
 {
