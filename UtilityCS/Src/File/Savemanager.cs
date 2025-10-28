@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using BenScr.Serialization.Json;
+using System.Text.Json;
 
 namespace BenScr.IO
 {
@@ -11,8 +12,8 @@ namespace BenScr.IO
     {
         public static readonly string MainPath = Filemanager.FromLocalAppFolder("SaveManager Storage");
 
-        private static string CreatePathFromType<T>(string key) 
-            => Filemanager.CombinePathWithExtension(Extension.json, MainPath, MainPath, typeof(T).Name, key);
+        private static string CreatePathFromType<T>(string key, Extension extension = Extension.json) 
+            => Filemanager.CombinePathWithExtension(extension, MainPath, MainPath, typeof(T).Name, key);
 
         public static string GetPathOfKey<T>(string key)
         {
@@ -36,12 +37,12 @@ namespace BenScr.IO
         public static void Save<T>(string key, T obj, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
-            Serializer.Json.Serialize(path, obj, options);
+            Json.Save(path, obj, options);
         }
         public static T Load<T>(string key, T defaultValue = default!, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
-            return Serializer.Json.Deserialize<T>(path, options: options);
+            return Json.Load<T>(path, options: options);
         }
     }
 }

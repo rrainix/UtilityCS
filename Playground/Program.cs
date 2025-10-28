@@ -110,7 +110,7 @@ public class Program
     public static void RandomSecurePreview()
     {
         Console.WriteLine("-- Random Secure Preview --");
-        RandomSecure randomSecure = new RandomSecure();
+        BenScr.Security.Cryptography.RandomSecure randomSecure = new BenScr.Security.Cryptography.RandomSecure();
         Console.WriteLine("Random between (0.0-10.0):" + randomSecure.Next(0, 10f));
     }
 

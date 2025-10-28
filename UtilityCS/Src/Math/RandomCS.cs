@@ -2,7 +2,7 @@
 
 namespace BenScr.Random
 {
-    public class RandomCS
+    public sealed class RandomCS
     {
         private ulong state;
 

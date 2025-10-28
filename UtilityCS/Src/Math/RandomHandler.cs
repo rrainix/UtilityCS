@@ -5,7 +5,7 @@ namespace BenScr.Random
     public static class RandomHandler
     {
         private static RandomCS random = new RandomCS();
-        private static RandomSecure randomSecure = new RandomSecure();
+        private static Security.Cryptography.RandomSecure randomSecure = new Security.Cryptography.RandomSecure();
 
         public static void SetSeed(ulong seed) => random.SetSeed(seed);
         public static void RemoveSeed(ulong seed) => random.RemoveSeed();

@@ -2,7 +2,7 @@
 
 namespace BenScr.Security.Cryptography
 {
-    public class RandomSecure
+    public sealed class RandomSecure
     {
         private const string CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw0123456789";
         private static readonly RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
@@ -95,9 +95,6 @@ namespace BenScr.Security.Cryptography
             return code;
         }
 
-        public void GenerateBytes(byte[] bytes)
-        {
-            randomNumberGenerator.GetBytes(bytes);
-        }
+        public void GenerateBytes(byte[] bytes) => randomNumberGenerator.GetBytes(bytes);
     }
 }
