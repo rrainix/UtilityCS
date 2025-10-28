@@ -15,11 +15,15 @@
 		<RepositoryType>git</RepositoryType>
 		
 		<PackageTags>
-			Serialization/Deserialization (Json, Xml, Binary);
+			Serialization/Deserialization;
+			Json;
+			Xml;
+			Binary;
 			Encryption/Decryption (AES);
 			Randomization;
 			Mathematics;
 			Cryptography;
+			Password Generation;
 			File Management;
 			Logging;
 			Mini LINQ;
@@ -33,6 +37,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="SerializerCS" Version="1.0.2" />
+		<PackageReference Include="PasswordGeneratorCS" Version="1.0.4" />
 		<None Include="../README.md" Pack="true" PackagePath="\" />
 		<None Include="../LICENSE.txt" Pack="true" PackagePath="\" />
 		<None Include="icon.png" Pack="true" PackagePath="\" />
