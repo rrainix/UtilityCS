@@ -14,7 +14,6 @@ namespace BenScr.Security.Cryptography
                     aes.GenerateKey();
                     aes.GenerateIV();
 
-                    // Hier nur Demo: Schlüssel + IV vorne anhängen, damit man später entschlüsseln kann
                     using (MemoryStream ms = new MemoryStream())
                     {
                         ms.Write(aes.IV, 0, aes.IV.Length);
@@ -33,8 +32,6 @@ namespace BenScr.Security.Cryptography
             {
                 using (Aes aes = Aes.Create())
                 {
-                    // IV und Key müssen bekannt sein (z. B. vom vorherigen Encrypt gespeichert)
-                    // Hier nur zur Demonstration: Wir nehmen sie aus den ersten Bytes
                     byte[] iv = new byte[aes.BlockSize / 8];
                     byte[] key = new byte[aes.KeySize / 8];
 
@@ -69,7 +66,6 @@ namespace BenScr.Security.Cryptography
 
                     using (var ms = new MemoryStream())
                     {
-                        // Salt mitschreiben (wird zum Entschlüsseln gebraucht)
                         ms.Write(salt, 0, salt.Length);
 
                         using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
@@ -117,7 +113,6 @@ namespace BenScr.Security.Cryptography
                     aes.GenerateKey();
                     aes.GenerateIV();
 
-                    // Hier nur Demo: Schlüssel + IV vorne anhängen, damit man später entschlüsseln kann
                     using (MemoryStream ms = new MemoryStream())
                     {
                         ms.Write(aes.IV, 0, aes.IV.Length);
@@ -138,8 +133,6 @@ namespace BenScr.Security.Cryptography
 
                 using (Aes aes = Aes.Create())
                 {
-                    // IV und Key müssen bekannt sein (z. B. vom vorherigen Encrypt gespeichert)
-                    // Hier nur zur Demonstration: Wir nehmen sie aus den ersten Bytes
                     byte[] iv = new byte[aes.BlockSize / 8];
                     byte[] key = new byte[aes.KeySize / 8];
 
@@ -176,7 +169,6 @@ namespace BenScr.Security.Cryptography
 
                     using (var ms = new MemoryStream())
                     {
-                        // Salt mitschreiben (wird zum Entschlüsseln gebraucht)
                         ms.Write(salt, 0, salt.Length);
 
                         using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
