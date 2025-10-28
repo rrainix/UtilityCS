@@ -41,9 +41,5 @@ using BenScr.Text;
 using BenScr.Debugging;
 ```
 
-## Technology
-<p align="center">
-<img src="Docs/NET 9.0 Zoomed.png" width="15%">
-<img src="Docs/CS 13.0 Zoomed.png" width="15%">
-   <img src="UtilityCS/icon.png" width="15%">
-</p>
+## Support
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/benscr)</p>
