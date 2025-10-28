@@ -42,11 +42,4 @@ using BenScr.Debugging;
 ```
 
 ## Support
-[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/yourname)
-
-## Technology
-<p align="center">
-<img src="Docs/NET 9.0 Zoomed.png" width="15%">
-<img src="Docs/CS 13.0 Zoomed.png" width="15%">
-   <img src="UtilityCS/icon.png" width="15%">
-</p>
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/yourname)</p>
