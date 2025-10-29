@@ -23,6 +23,7 @@ public class Program
       { "Secure Random Preview", new Action(RandomSecurePreview) },
       { "Enctyptor Preview", new Action(EncryptorPreview) },
       { "Type Utility Preview", new Action(TypeUtilityPreview) },
+      {"Mini Linq Preview", new Action(MiniLinqPreview) }
   };
 
     public static void Main(string[] args)
@@ -122,5 +123,18 @@ public class Program
         Console.WriteLine($"Original Message: \"{message}\"");
         Console.WriteLine($"Encrypted Message: \"{encrypedMessage}\"");
         Console.WriteLine($"Decrypted Message: \"{Encryptor.String.Decrypt(encrypedMessage)}\"");
+    }
+
+    public static void MiniLinqPreview()
+    {
+        int[] array = { 0, 2, 3, 4, 5, 6, 7, 8, 10 ,2, 2,2};
+        int index = MiniLinq.IndexOf(array, i => i == 2);
+        MiniLinq.Select(array, i => i+1);
+        int count = MiniLinq.Count(array, i =>  i == 2);
+        int[] only2 = MiniLinq.Where(array, i => i == 2);
+        Console.WriteLine(count);
+        Console.WriteLine(only2.Length);
+        Console.WriteLine(array[0]);
+        Console.WriteLine(index);
     }
 }
