@@ -2,10 +2,11 @@
 A wide-range `Net 9.0` C# Utility Library
 
 ## Features
-- Serializing and Deserializing Data (JSON, XML, BINARY)
+- Serializing and Deserializing Data featuring Json, Xml and Binary
 - File Management
 - Randomization
-- Encryption and Decryption
+- Password Generation
+- Encryption and Decryption (AES)
 - Mathematics
 - Logging
 - Mini LINQ
@@ -13,7 +14,6 @@ A wide-range `Net 9.0` C# Utility Library
 
 ## How to use
 Take a look at [`Playground/Program.cs`](Playground/Program.cs)
-
 
 ## How to install
 ### Option 1 - Clone the Repository
