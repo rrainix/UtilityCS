@@ -1,4 +1,6 @@
 ﻿
+using System.Numerics;
+
 namespace BenScr.Linq
 {
     public static class MiniLinq
@@ -38,7 +40,7 @@ namespace BenScr.Linq
             return defaultValue;
         }
 
-        public static TResult[] Select<T, TResult>(this T[] array, Func<T, TResult> selector)
+        public static TResult[] Select<T, TResult>(T[] array, Func<T, TResult> selector)
         {
             var result = new TResult[array.Length];
             for (int i = 0; i < array.Length; i++)
@@ -87,6 +89,19 @@ namespace BenScr.Linq
             }
 
             return false;
+        }
+
+
+        public static T Average<T>(T[] array) where T : INumber<T>
+        {
+            T sum = default;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+
+            return sum / T.CreateChecked(array.Length);
         }
     }
 }

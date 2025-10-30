@@ -55,5 +55,13 @@ namespace BenScr.Text
         {
             return $"<color=#{hexColor}>{text}</color>";
         }
+
+        public static int DifferentCharsCount(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return 0;
+
+            return s.Distinct().Count();
+        }
     }
 }

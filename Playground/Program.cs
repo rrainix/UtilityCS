@@ -127,9 +127,13 @@ public class Program
 
     public static void MiniLinqPreview()
     {
-        int[] array = { 0, 2, 3, 4, 5, 6, 7, 8, 10 ,2, 2,2};
+        int[] array = { 1,2,3,4,5,6,7,8,9,10};
+
+        Vector2[,] array2 = { { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } , { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } };
+
         int index = MiniLinq.IndexOf(array, i => i == 2);
         MiniLinq.Select(array, i => i+1);
+        MiniLinq.Select(array,i => i * 2.0f);
         int count = MiniLinq.Count(array, i =>  i == 2);
         int[] only2 = MiniLinq.Where(array, i => i == 2);
         Console.WriteLine(count);

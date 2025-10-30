@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<PackageId>UtilityCS</PackageId>
-		<Version>1.0.5</Version>
+		<Version>1.0.6</Version>
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -11,7 +11,7 @@
 		<Description>A Wide Range C# Utility Library</Description>
 		
 		<PackageProjectUrl>https://github.com/Ben-Scr/UtilityCS</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/Ben-Scr/UtilityCS</RepositoryUrl>
+		<RepositoryUrl>https://ko-fi.com/benscr</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		
 		<PackageTags>
