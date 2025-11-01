@@ -2,7 +2,8 @@
 A wide-range `Net 9.0` C# Utility Library
 
 ## Features
-- Serializing and Deserializing Data featuring Json, Xml and Binary
+- Serialization and Deserialization
+- JSON, XML, Binary
 - File Management
 - Randomization
 - Password Generation
