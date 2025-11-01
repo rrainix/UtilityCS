@@ -16,6 +16,13 @@ public class Program
 {
     private const string SEPERATOR = "-----------------------------------";
 
+    public class User
+    {
+        public string Name;
+        public string Password;
+        public int Age;
+    }
+
     private static Dictionary<string, Delegate> previews = new()
   {
       { "Savemanager Preview", new Action(SaveManagerPreview) },
@@ -67,12 +74,10 @@ public class Program
     public static void TypeUtilityPreview()
     {
         Console.WriteLine("-- Type Utility Preview --");
-        Vector2 vec2 = new Vector2(10.14f, 1);
-        string propertyName = "X";
-
-        float vec2X = TypeUtility.GetValueFromField<float, Vector2>(propertyName, vec2);
-        Console.WriteLine(vec2.X);
-        Console.WriteLine(vec2X);
+        User user = new User { Age = 25, Name = "Test", Password = "password123" };
+        user.SetFieldValue<User, int>("Age", 20);
+        int age = user.GetFieldValue<int, User>("Age");
+        Console.WriteLine(user.Age + " " + age);
     }
 
     public static void SaveManagerPreview()
@@ -127,18 +132,17 @@ public class Program
 
     public static void MiniLinqPreview()
     {
-        int[] array = { 1,2,3,4,5,6,7,8,9,10};
+        Console.WriteLine("-- Mini Linq Preview --");
+        int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-        Vector2[,] array2 = { { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } , { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } };
+        Vector2[,] array2 = { { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) }, { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } };
         List<int> lis = new List<int>();
         MiniLinq.Find(lis, v => v.Equals(2));
         int index = MiniLinq.IndexOf(array, i => i == 2);
-        MiniLinq.Select(array, i => i+1);
-        MiniLinq.Select(array,i => i * 2.0f);
-        int count = MiniLinq.Count(array, i =>  i == 2);
-        int[] only2 = MiniLinq.Where(array, i => i == 2);
+        MiniLinq.Select(array, i => i + 1);
+        MiniLinq.Select(array, i => i * 2.0f);
+        int count = MiniLinq.Count(array, i => i == 2);
         Console.WriteLine(count);
-        Console.WriteLine(only2.Length);
         Console.WriteLine(array[0]);
         Console.WriteLine(index);
     }

@@ -2,9 +2,20 @@
 
 namespace BenScr.Reflection
 {
-    public class TypeUtility
+    public static class TypeUtility
     {
-        public static BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        public static BindingFlags BindingFlags =
+       BindingFlags.Instance |
+       BindingFlags.Static |
+       BindingFlags.Public |
+       BindingFlags.NonPublic |
+       BindingFlags.FlattenHierarchy |
+       BindingFlags.GetProperty |
+       BindingFlags.SetProperty |
+       BindingFlags.GetField |
+       BindingFlags.SetField |
+       BindingFlags.InvokeMethod |
+       BindingFlags.CreateInstance;
 
         public static string GetTypeName<T>()
         {
@@ -14,14 +25,15 @@ namespace BenScr.Reflection
         {
             return Linq.MiniLinq.Select(typeof(T).GetFields(BindingFlags), p => p.Name).ToArray();
         }
-        public static T GetValueFromField<T, T2>(string fieldName, T2 obj)
+
+        public static TResult GetFieldValue<TResult, TSource>(this TSource obj, string fieldName)
         {
-            return (T)typeof(T2).GetField(fieldName, BindingFlags).GetValue(obj) ?? throw new NullReferenceException($"Property or Value of {fieldName} is null");
+            return (TResult)typeof(TSource).GetField(fieldName, BindingFlags).GetValue(obj) ?? throw new NullReferenceException($"Property or Value of {fieldName} is null");
         }
 
-        public static void SetFieldValue<T, T2>(string fieldName, T obj,T2 value) where T : class
+        public static void SetFieldValue<TSource, T2>(this TSource obj, string fieldName, T2 value) where TSource : class
         {
-            typeof(T).GetField(fieldName, BindingFlags).SetValue(obj, value);
+            typeof(TSource).GetField(fieldName, BindingFlags)?.SetValue(obj, value);
         }
     }
 }
