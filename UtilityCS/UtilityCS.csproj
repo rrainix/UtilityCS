@@ -13,21 +13,12 @@
 		<PackageProjectUrl>https://github.com/Ben-Scr/UtilityCS</PackageProjectUrl>
 		<RepositoryUrl>https://ko-fi.com/benscr</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		
+
 		<PackageTags>
-			Serialization/Deserialization;
-			Json;
-			Xml;
-			Binary;
-			Encryption/Decryption (AES);
-			Randomization;
-			Mathematics;
-			Cryptography;
-			Password Generation;
-			File Management;
-			Logging;
-			Mini LINQ;
-			CMD Functions;
+			Serialization; Deserialization; JSON; XML; Binary;
+			Encryption; Decryption; AES; Randomization;
+			Mathematics; Cryptography; PasswordGeneration;
+			FileManagement; Logging; LINQ; CommandLine;
 		</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
