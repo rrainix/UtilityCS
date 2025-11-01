@@ -14,7 +14,7 @@ namespace BenScr.IO
         txt, json, dat, bin
     }
 
-    public static class Filemanager
+    public static class FileManager
     {
         public static string DesktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         public static string LocalAppFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -28,6 +28,7 @@ namespace BenScr.IO
 
             string trimmed = path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             string parent = Path.GetDirectoryName(trimmed) ?? string.Empty;
+
             if (string.IsNullOrEmpty(parent) && Path.IsPathRooted(trimmed))
                 return Path.GetPathRoot(trimmed) ?? string.Empty;
 
@@ -41,8 +42,10 @@ namespace BenScr.IO
                 long fileSizeInBytes = new FileInfo(path).Length;
                 return fileSizeInBytes / (double)memoryUnit;
             }
-
-            return -1;
+            else
+            {
+                throw new FileNotFoundException($"File at path ({path}) doesn't Exist");
+            }
         }
 
         public static void DeleteAllFromDirectory(string directoryPath, bool onlyFiles)

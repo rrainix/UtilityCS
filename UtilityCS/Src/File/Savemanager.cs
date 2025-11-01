@@ -10,30 +10,19 @@ namespace BenScr.IO
 
     public static class SaveManager
     {
-        public static readonly string MainPath = Filemanager.FromLocalAppFolder("SaveManager Storage");
+        public static string MainPath = FileManager.FromLocalAppFolder("SaveManager Storage");
 
         private static string CreatePathFromType<T>(string key, Extension extension = Extension.json) 
-            => Filemanager.CombinePathWithExtension(extension, MainPath, MainPath, typeof(T).Name, key);
+            => FileManager.CombinePathWithExtension(extension, MainPath, MainPath, typeof(T).Name, key);
 
         public static string GetPathOfKey<T>(string key)
-        {
-            return CreatePathFromType<T>(key);
-        }
+            => CreatePathFromType<T>(key);
 
-        public static int GetSavedFilesCount() => Filemanager.GetDirectoryFiles(MainPath, true).Length;
-        public static string[] GetSavedFilesPath() => Filemanager.GetDirectoryFiles(MainPath, true);
+        public static int GetSavedFilesCount() => FileManager.GetDirectoryFiles(MainPath, true).Length;
+        public static string[] GetSavedFilesPath() => FileManager.GetDirectoryFiles(MainPath, true);
 
-        public static void ClearAll(bool filesOnly = false) => Filemanager.DeleteAllDirectories(MainPath, filesOnly);
+        public static void ClearAll(bool filesOnly = false) => FileManager.DeleteAllDirectories(MainPath, filesOnly);
 
-        public static void Delete<T>(string key)
-        {
-            string path = CreatePathFromType<T>(key);
-
-            if (!File.Exists(path))
-                throw new FileNotFoundException($"File with key ({key}) at path ({path}) doesn't Exist");
-
-            File.Delete(path);
-        }
         public static void Save<T>(string key, T obj, JsonSerializerOptions? options = null)
         {
             string path = CreatePathFromType<T>(key);
@@ -43,6 +32,15 @@ namespace BenScr.IO
         {
             string path = CreatePathFromType<T>(key);
             return Json.Load<T>(path, options: options);
+        }
+        public static void Delete<T>(string key)
+        {
+            string path = CreatePathFromType<T>(key);
+
+            if (!File.Exists(path))
+                throw new FileNotFoundException($"File with key ({key}) at path ({path}) doesn't Exist");
+
+            File.Delete(path);
         }
     }
 }
