@@ -12,10 +12,8 @@ A wide-range `Net 9.0` C# Utility Library
 - Mini LINQ
 - CMD Utils
 
-## How to use
-Take a look at [`Playground/Program.cs`](Playground/Program.cs)
-
 ## How to install
+
 ### Option 1 - Clone the Repository
 1. Clone with  
    `https://github.com/Ben-Scr/UtilityCS`
@@ -26,6 +24,9 @@ Take a look at [`Playground/Program.cs`](Playground/Program.cs)
 1. Install the package from NuGet:
    ```bash
    dotnet add package UtilityCS
+
+## How to use
+Take a look at [`Playground/Program.cs`](Playground/Program.cs)
 
 ## Namespaces
 ```csharp
@@ -42,4 +43,6 @@ using BenScr.Debugging;
 ```
 
 ## Support
-[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/benscr)</p>
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/benscr)
+[![Linktree](https://img.shields.io/badge/Linktree-00C853?style=for-the-badge&logo=linktree&logoColor=white)](https://linktr.ee/benscr)
+
