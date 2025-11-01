@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace BenScr.IO
 {
-    // Savemanager is a highlevel class simply used for saving and loading data generically.
+    // Savemanager is a highlevel class simply used for saving and loading data in json.
     // Usage example:
     // int highscore = 0; SaveManager.Save<int>("Highscore", highscore);
     // int highscore = SaveManager.Load<int>("Highscore");
