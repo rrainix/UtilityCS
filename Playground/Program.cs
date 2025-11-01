@@ -130,7 +130,8 @@ public class Program
         int[] array = { 1,2,3,4,5,6,7,8,9,10};
 
         Vector2[,] array2 = { { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } , { new Vector2(0, 5), new Vector2(2, 1), new Vector2(1, 2), new Vector2(0, 4) } };
-
+        List<int> lis = new List<int>();
+        MiniLinq.Find(lis, v => v.Equals(2));
         int index = MiniLinq.IndexOf(array, i => i == 2);
         MiniLinq.Select(array, i => i+1);
         MiniLinq.Select(array,i => i * 2.0f);

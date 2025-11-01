@@ -5,21 +5,21 @@ namespace BenScr.Linq
 {
     public static class MiniLinq
     {
-        public static T Find<T>(T[] array, Func<T, bool> predicate, T defaultValue = default!)
+        public static T? Find<T>(IEnumerable<T> items, Func<T, bool> predicate)
         {
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (predicate(item)) return item;
             }
 
-            return defaultValue;
+            return default;
         }
 
-        public static int IndexOf<T>(T[] array, T obj, int defaultValue = default!)
+        public static int IndexOf<T>(IEnumerable<T> items, T obj, int defaultValue = default!)
         {
             int i = 0;
 
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (item.Equals(obj)) return i;
                 i++;
@@ -27,11 +27,11 @@ namespace BenScr.Linq
 
             return defaultValue;
         }
-        public static int IndexOf<T>(T[] array, Func<T, bool> predicate, int defaultValue = default!)
+        public static int IndexOf<T>(IEnumerable<T> items, Func<T, bool> predicate, int defaultValue = default!)
         {
             int i = 0;
 
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (predicate(item)) return i;
                 i++;
@@ -40,50 +40,51 @@ namespace BenScr.Linq
             return defaultValue;
         }
 
-        public static TResult[] Select<T, TResult>(T[] array, Func<T, TResult> selector)
+        public static IEnumerable<TResult> Select<T, TResult>(IEnumerable<T> items, Func<T, TResult> selector)
         {
-            var result = new TResult[array.Length];
-            for (int i = 0; i < array.Length; i++)
+            int itemsLength = items.Count();
+            var result = new TResult[itemsLength];
+            for (int i = 0; i < itemsLength; i++)
             {
-                result[i] = selector(array[i]);
+                result[i] = selector(items.ElementAt(i));
             }
             return result;
         }
 
-        public static T[] Where<T>(T[] array, Func<T, bool> predicate)
+        public static IEnumerable<T> Where<T>(IEnumerable<T> items, Func<T, bool> predicate)
         {
             List<T> list = new List<T>();
 
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (predicate(item)) list.Add(item);
             }
 
             return list.ToArray();
         }
-        public static int Count<T>(T[] array, Func<T, bool> predicate)
+        public static int Count<T>(IEnumerable<T> items, Func<T, bool> predicate)
         {
             int count = 0;
 
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (predicate(item)) count++;
             }
 
             return count;
         }
-        public static bool Contains<T>(T[] array, Func<T, bool> predicate)
+        public static bool Contains<T>(IEnumerable<T> items, Func<T, bool> predicate)
         {
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (predicate(item)) return true;
             }
 
             return false;
         }
-        public static bool Contains<T>(T[] array, T obj)
+        public static bool Contains<T>(IEnumerable<T> items, T obj)
         {
-            foreach (var item in array)
+            foreach (var item in items)
             {
                 if (item.Equals(obj)) return true;
             }
@@ -92,16 +93,17 @@ namespace BenScr.Linq
         }
 
 
-        public static T Average<T>(T[] array) where T : INumber<T>
+        public static T Average<T>(IEnumerable<T> items) where T : INumber<T>
         {
             T sum = default;
+            int itemsLength = items.Count();
 
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < itemsLength; i++)
             {
-                sum += array[i];
+                sum += items.ElementAt(i);
             }
 
-            return sum / T.CreateChecked(array.Length);
+            return sum / T.CreateChecked(itemsLength);
         }
     }
 }
