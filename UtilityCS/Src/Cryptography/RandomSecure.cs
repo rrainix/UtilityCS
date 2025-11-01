@@ -6,44 +6,6 @@ namespace BenScr.Security.Cryptography
     {
         private const string CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw0123456789";
         private static readonly RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
-        private byte[] buffer;
-        int bufferIndex = 0;
-
-        public void GenerateBuffer(int length)
-        {
-            bufferIndex = 0;
-            buffer = new byte[length];
-            randomNumberGenerator.GetBytes(buffer);
-        }
-        public void ClearBuffer()
-        {
-            bufferIndex = 0;
-            buffer = new byte[0];
-        }
-
-        private void GetBuffer(byte[] bytes)
-        {
-            if (bufferIndex >= buffer.Length - 1)
-                throw new IndexOutOfRangeException("Use GenerateBuffer(int length) for generating new elements");
-
-            Array.Copy(buffer, bufferIndex, bytes, 0, bytes.Length);
-            bufferIndex += bytes.Length;
-        }
-
-        public int NextIntBuffered()
-        {
-            byte[] fourBytes = new byte[4];
-            GetBuffer(fourBytes);
-            int value = BitConverter.ToInt32(fourBytes, 0) & int.MaxValue;
-            return value;
-        }
-        public byte NextByteBuffered()
-        {
-            if (bufferIndex >= buffer.Length)
-                throw new IndexOutOfRangeException("Use GenerateBuffer(int length) for generating new elements");
-
-            return buffer[bufferIndex++];
-        }
 
         public int NextInt()
         {
