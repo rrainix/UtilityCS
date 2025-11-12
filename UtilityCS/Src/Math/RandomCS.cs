@@ -38,37 +38,56 @@ namespace BenScr.Random
 
         public ulong GetSeed() => state;
 
-        private int NextInt()
+
+        public byte NextByte()
+        {
+            return (byte)(NextState() & 0xFF);
+        }
+
+        public bool NextBool() => NextInt(0, 2) == 0;
+
+
+        public int NextInt()
         {
             return (int)(NextState() & 0x7FFFFFFF);
         }
-        private double NextDouble()
-        {
-            return (double)NextState() / ulong.MaxValue;
-        }
-
-        public int Next(int max)
+        public int NextInt(int max)
         {
             if (max <= 0) throw new ArgumentOutOfRangeException(nameof(max));
             return NextInt() % max;
         }
-
-        public int Next(int min, int max)
+        public int NextInt(int min, int max)
         {
             if (min >= max) throw new ArgumentOutOfRangeException($"Next({min},{max}) is wrong, min can't be more or equal to max.");
             return min + (NextInt() % (max - min));
         }
 
-        public double Next(double min, double max)
+        public double NextDouble()
+        {
+            return (double)NextState() / ulong.MaxValue;
+        }
+        public double NextDouble(double max)
+        {
+            if (max <= 0) throw new ArgumentOutOfRangeException(nameof(max));
+            return NextDouble() % max;
+        }
+        public double NextDouble(double min, double max)
         {
             return min + (NextDouble() * (max - min));
         }
 
-        public bool CoinFlip() => Next(0, 2) == 0;
-
-        public bool Chance(float threshold, float max = 1.0f)
+        public float NextFloat()
         {
-            return Next(0f, max) < threshold;
+            return (float)NextDouble();
+        }
+        public float NextFloat(float max)
+        {
+            if (max <= 0) throw new ArgumentOutOfRangeException(nameof(max));
+            return NextFloat() % max;
+        }
+        public float NextFloat(float min, float max)
+        {
+            return min + (NextFloat() * (max - min));
         }
     }
 }

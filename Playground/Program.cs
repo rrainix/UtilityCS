@@ -1,16 +1,16 @@
-﻿using System.Reflection;
-using System.Diagnostics;
-
-using BenScr.Collections;
-using BenScr.Math;
-using BenScr.Random;
-using BenScr.Security.Cryptography;
+﻿using BenScr.Collections;
+using BenScr.Debugging;
 using BenScr.Diagnostics;
 using BenScr.IO;
 using BenScr.Linq;
+using BenScr.Math;
+using BenScr.Random;
 using BenScr.Reflection;
+using BenScr.Security.Cryptography;
 using BenScr.Text;
-using BenScr.Debugging;
+using System;
+using System.Diagnostics;
+using System.Reflection;
 
 public class Program
 {
@@ -40,21 +40,22 @@ public class Program
 
     private static void Run()
     {
+        RandomCS randomCS = new RandomCS();
+
         do
         {
             Console.Clear();
-            int i = 1;
             Console.WriteLine(SEPERATOR);
 
-            foreach (var key in previews.Keys)
+            for (int i = 0; i < previews.Keys.Count; i++)
             {
-                var option = previews[key];
+                var option = previews.Values.ElementAt(i);
 
                 if (option is Action action)
                 {
-                    Console.WriteLine($"({i++}/{previews.Count})");
+                    Console.WriteLine($"({i + 1}/{previews.Count})");
                     action();
-                    EnterForNextPreview();
+                    EnterForNextPreview(ref i);
                 }
             }
 
@@ -62,11 +63,16 @@ public class Program
         } while (Console.ReadLine().ToLower() == "y");
     }
 
-    public static void EnterForNextPreview()
+    public static void EnterForNextPreview(ref int i)
     {
         Console.WriteLine(SEPERATOR);
-        Console.WriteLine("Press Enter to see the next preview");
-        Console.ReadLine();
+        Console.WriteLine("Press `Enter` to see the next preview `Left Arrow` to go back and `R` to see again");
+        ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+
+        if (consoleKeyInfo.Key == ConsoleKey.LeftArrow) i = Math.Max(-1, i - 2);
+        if (consoleKeyInfo.Key == ConsoleKey.R) i--;
+
+
         Console.Clear();
         Console.WriteLine(SEPERATOR);
     }
@@ -109,8 +115,9 @@ public class Program
     {
         Console.WriteLine("-- Random Preview --");
         RandomCS random = new RandomCS();
-        Console.WriteLine($"Random between (0-1000): {random.Next(1000)}");
-        Console.WriteLine($"Random between (0.0-10.0): {random.Next(0.0, 10.0)}");
+        Console.WriteLine($"Random between (0-1000): {random.NextInt(1000)}");
+        Console.WriteLine($"Random between (0.0-10.0): {random.NextDouble(0.0, 10.0)}");
+        Console.WriteLine($"Random byte {random.NextByte()}");
     }
 
     public static void RandomSecurePreview()
