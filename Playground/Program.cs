@@ -94,7 +94,7 @@ public class Program
             Console.WriteLine("-- Savemanager Preview --");
             Vector2 vector2 = new Vector2(15.0f, 25.0f);
             SaveManager.Save("Position", vector2);
-            Console.WriteLine($"Succesfully Saved Vector2{vector2}, at path '{SaveManager.GetPathOfKey<Vector2>("Position")}'.");
+            Console.WriteLine($"Succesfully Saved Vector2{vector2}, at path '{SaveManager.GetFolderPathOfKey<Vector2>()}'.");
         }
 
         // Loading

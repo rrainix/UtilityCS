@@ -12,11 +12,13 @@ namespace BenScr.IO
     {
         public static string MainPath = FileManager.FromLocalAppFolder("SaveManager Storage");
 
-        private static string CreatePathFromType<T>(string key, Extension extension = Extension.json) 
+        private static string CreatePathFromType<T>(string key, Extension extension = Extension.json)
             => FileManager.CombinePathWithExtension(extension, MainPath, MainPath, typeof(T).Name, key);
 
         public static string GetPathOfKey<T>(string key)
             => CreatePathFromType<T>(key);
+        public static string GetFolderPathOfKey<T>()
+            => FileManager.RemoveLastPathSegment(CreatePathFromType<T>("Key"));
 
         public static int GetSavedFilesCount() => FileManager.GetDirectoryFiles(MainPath, true).Length;
         public static string[] GetSavedFilesPath() => FileManager.GetDirectoryFiles(MainPath, true);
