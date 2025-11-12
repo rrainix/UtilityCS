@@ -69,9 +69,10 @@ public class Program
         Console.WriteLine("Press `Enter` to see the next preview `Left Arrow` to go back and `R` to see again");
         ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
 
-        if (consoleKeyInfo.Key == ConsoleKey.LeftArrow) i = Math.Max(-1, i - 2);
+        if (consoleKeyInfo.Key == ConsoleKey.LeftArrow) i = i - 2;
         if (consoleKeyInfo.Key == ConsoleKey.R) i--;
 
+        if (i < -1) i = 4;
 
         Console.Clear();
         Console.WriteLine(SEPERATOR);
