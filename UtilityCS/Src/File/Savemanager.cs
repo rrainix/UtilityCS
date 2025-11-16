@@ -27,7 +27,7 @@ namespace BenScr.IO
 
         public static void Save<T>(string key, T obj, JsonSerializerOptions? options = null)
         {
-            string path = CreatePathFromType<T>(key);
+            string path = CreatePathFromType<T>(key); 
             Json.Save(path, obj, options);
         }
         public static T Load<T>(string key, T defaultValue = default!, JsonSerializerOptions? options = null)
