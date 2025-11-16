@@ -8,20 +8,18 @@ namespace BenScr.Random
         private static RandomSecure randomSecure = new RandomSecure();
 
         public static void SetSeed(ulong seed) => random.SetSeed(seed);
-        public static void RemoveSeed(ulong seed) => random.RemoveSeed();
+        public static void RemoveSeed() => random.RemoveSeed();
+
+        public static bool NextBool() => random.NextBool();
         public static int NextInt(int min, int max) => random.NextInt(min, max);
         public static double NextDouble(double min, double max) => random.NextDouble(min, max);
-        public static bool NextBool() => random.NextBool();
-        public static double NextDouble() => random.NextDouble(0.0, 1.0);
 
         public static class Secure
         {
-            public static int Range(int min, int max) => randomSecure.Next(min, max);
-            public static double Range(double min, double max) => randomSecure.Next(min, max);
-            public static bool CoinFlip() => randomSecure.CoinFlip();
-            public static bool Chance(float threshold, float max = 1.0f) => randomSecure.Chance(threshold, max);
-            public static double NextDouble() => randomSecure.Next(0.0, 1.0);
-            public static string Code() => randomSecure.GenerateCode();
+            public static bool NextBool() => randomSecure.NextBool();
+            public static int NextInt(int min, int max) => randomSecure.NextInt(min, max);
+            public static double NextDouble(double min, double max) => randomSecure.NextDouble(min, max);
+            public static string NextString() => randomSecure.NextString();
             public static void GenerateBytes(byte[] bytes) => randomSecure.GenerateBytes(bytes);
         }
     }

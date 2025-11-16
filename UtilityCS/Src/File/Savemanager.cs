@@ -10,7 +10,7 @@ namespace BenScr.IO
 
     public static class SaveManager
     {
-        public static string MainPath = FileManager.FromLocalAppFolder("SaveManager Storage");
+        public static string MainPath = FileManager.FromLocalAppFolder("BenScr", "SaveManager");
 
         private static string CreatePathFromType<T>(string key, Extension extension = Extension.json)
             => FileManager.CombinePathWithExtension(extension, MainPath, MainPath, typeof(T).Name, key);
