@@ -27,8 +27,9 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="SerializerCS" Version="1.0.2" />
-		<PackageReference Include="PasswordGeneratorCS" Version="1.0.4" />
+		<PackageReference Include="RandomCS" Version="1.0.0" />
+		<PackageReference Include="SerializerCS" Version="1.0.4" />
+		<PackageReference Include="PasswordGeneratorCS" Version="1.0.8" />
 		<None Include="../README.md" Pack="true" PackagePath="\" />
 		<None Include="../LICENSE.txt" Pack="true" PackagePath="\" />
 		<None Include="icon.png" Pack="true" PackagePath="\" />
