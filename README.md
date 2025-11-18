@@ -1,11 +1,14 @@
 # C# Utility Library
-A wide-range `Net 9.0` C# Utility Library
+A wide-range `Net 9.0` C# Utility Library combining all of my projects code
 
 ## Features
 - Serialization and Deserialization
 - JSON, XML, Binary
 - File Management
+- Collections
+- Native Collections
 - Randomization
+- Cryptography
 - Password Generation
 - Encryption and Decryption (AES)
 - Mathematics
@@ -32,6 +35,7 @@ Take a look at [`Playground/Program.cs`](Playground/Program.cs)
 ## Namespaces
 ```csharp
 using BenScr.Collections;
+using BenScr.Collections.Native;
 using BenScr.Math;
 using BenScr.Random;
 using BenScr.Security.Cryptography;
