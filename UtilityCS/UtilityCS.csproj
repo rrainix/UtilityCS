@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<PackageId>UtilityCS</PackageId>
-		<Version>1.0.8</Version>
+		<Version>1.0.9</Version>
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -29,7 +29,7 @@
 	<ItemGroup>
 		<PackageReference Include="NativeCollectionsCS" Version="1.0.1" />
 		<PackageReference Include="RandomCS" Version="1.0.1" />
-		<PackageReference Include="SerializerCS" Version="1.0.6" />
+		<PackageReference Include="SerializerCS" Version="1.0.7" />
 		<PackageReference Include="PasswordGeneratorCS" Version="1.0.8" />
 		<None Include="../README.md" Pack="true" PackagePath="\" />
 		<None Include="../LICENSE.txt" Pack="true" PackagePath="\" />
