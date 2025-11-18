@@ -18,6 +18,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="NativeCollectionsCS" Version="1.0.1" />
+	  <PackageReference Include="RandomCS" Version="1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\UtilityCS\UtilityCS.csproj" />
 	</ItemGroup>
 
