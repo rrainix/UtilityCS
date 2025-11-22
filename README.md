@@ -2,8 +2,7 @@
 A wide-range `Net 9.0` C# Utility Library combining all of my projects code
 
 ## Features
-- Serialization and Deserialization
-- JSON, XML, Binary
+- Serialization and Deserialization (JSON, XML, Binary)
 - File Management
 - Collections
 - Native Collections
